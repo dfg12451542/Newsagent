@@ -23,13 +23,11 @@ Newsagent/
 First, crawl news articles from BBC and AP News:
 
 ```bash
-cd Crawl_code
-
 # Crawl AP News articles from 2025
-python APNews_crawler.py
+python Crawl_code/APNews_crawler.py
 
 # Crawl BBC News articles from 2025  
-python bbc_crawler.py
+python Crawl_code/bbc_crawler.py
 ```
 
 This creates:
@@ -41,13 +39,11 @@ This creates:
 Collect June and July articles and renumber them:
 
 ```bash
-cd Generate_json
-
 # Collect June/July articles from both sources
-python collect.py
+python Generate_json/collect.py
 
 # Check date ranges in crawled data
-python get_date_range.py
+python Generate_json/get_date_range.py
 ```
 
 This creates `Crawl_data/june_july_news/` with sequentially numbered articles.
@@ -57,10 +53,8 @@ This creates `Crawl_data/june_july_news/` with sequentially numbered articles.
 Process articles through GPT to extract structured information:
 
 ```bash
-cd Generate_json
-
 # Process articles and extract Report_info, Firsthand_Information, Historical_Information
-python request.py
+python Generate_json/request.py
 ```
 
 This creates `_data_june_july.json` with structured article data.
@@ -70,16 +64,14 @@ This creates `_data_june_july.json` with structured article data.
 Combine and tokenize the data:
 
 ```bash
-cd Statistic
-
 # Filter for English articles only
-python filter_english_news.py
+python Statistic/filter_english_news.py
 
 # Optionally rewrite historical information for parallel data
-python rewrite_historical_info.py
+python Statistic/rewrite_historical_info.py
 
 # Combine and tokenize all data
-python tokenize_and_combine_json.py
+python Statistic/tokenize_and_combine_json.py
 ```
 
 This creates `report_dataset.json` - the main dataset for the ReAct system.
@@ -89,84 +81,65 @@ This creates `report_dataset.json` - the main dataset for the ReAct system.
 ### Single-Step ReAct Approach
 
 ```bash
-cd react
-
 # Set your LLM provider and API keys
-export LLM_PROVIDER="DEEPINFRA"  # or "GPT" or "GEMINI"
+export LLM_PROVIDER="DEEPINFRA"  # or "GPT" 
 export LLM_MODEL="google/gemma-3-27b-it"  # or your preferred model
 
 # Run single-step ReAct (processes articles 0-100)
-python react_1_step.py
+python react/react_1_step.py
 ```
 
-**Features:**
 - Single prompt for all actions (search, insert, remove, modify)
-- Up to 20 query iterations per article
-- Supports GPT, DeepInfra providers
-- Generates `output_async_react_[model]/` with draft reports
+- Generates `1_step_[model]/` with draft reports
 
 ### Two-Step ReAct Approach
 
 ```bash
-cd react
-
 # Set your LLM provider and API keys
 export LLM_PROVIDER="DEEPINFRA"
 export LLM_MODEL="Qwen/Qwen3-32B"
 
 # Run two-step ReAct (processes specific article ranges)
-python react_2_step.py
+python react/react_2_step.py
 ```
 
-**Features:**
 - Separate specialized prompts for search, insert, and remove actions
-- Better action detection and execution
-- Supports GPT, DeepInfra, and Gemini providers
-- Generates `output_async_100_[model]/` with draft reports
+- Generates `2_step_[model]/` with draft reports
 
 ### Rule-Based Alternative
 
 ```bash
-cd react
-
 # Run rule-based approach (no LLM calls, faster)
-python rule_base.py
+python react/rule_base.py
 ```
-
-**Features:**
 - Automated query generation from article content
 - Direct semantic search with score thresholds
 - No LLM intervention - predictable results
-- Generates `output_async_react_rule/`
+- Generates `rule_base/`
 
 ## Evaluation System Differences
 
-### 1. `gpt_evaluation.py` - Comprehensive Model Comparison
+### 1. `LLM_evaluation.py` - Comprehensive Model Comparison
 
 **Purpose:** Full pairwise evaluation of all models
 ```bash
-cd evaluation
-python gpt_evaluation.py
+python evaluation/LLM_evaluation.py
 ```
-
-**What it does:**
 - Compares 9+ models in round-robin fashion
-- 8 evaluation dimensions (Factual Consistency, Logical Consistency, etc.)
+- 6 main evaluation dimensions (Factual Consistency, Logical Consistency, etc.)
 - Uses GPT-4o as judge for automated evaluation
 - Generates win/loss matrices and summary statistics
 - Supports checkpointing and resume functionality
 
 **Output:** Complete evaluation results in `eval_results/`
 
-### 2. `evaluate_f1.py` - Search Quality Metrics
+### 2. `2_step_evaluation.py.py` - Search Quality Metrics
 
 **Purpose:** F1 score evaluation for search and retrieval
 ```bash
-cd evaluation
-python evaluate_f1.py
+python evaluation/2_step_evaluation.py
 ```
 
-**What it does:**
 - Calculates precision, recall, and F1 scores
 - Compares search strategies across models
 - Focuses on historical information overlap
@@ -174,15 +147,13 @@ python evaluate_f1.py
 
 **Output:** F1 scores and overlap metrics
 
-### 3. `evaluation_react.py` - ReAct-Specific Evaluation
+### 3. `1_step_evaluation.py` - ReAct-Specific Evaluation
 
 **Purpose:** Enhanced evaluation for ReAct systems
 ```bash
-cd evaluation
-python evaluation_react.py
+python evaluation/1_step_evaluation.py
 ```
 
-**What it does:**
 - Handles both old and new ReAct output schemas
 - Enhanced text extraction from various data structures
 - Action-specific performance tracking
@@ -194,11 +165,9 @@ python evaluation_react.py
 
 **Purpose:** Analysis of raw evaluation outputs
 ```bash
-cd evaluation
-python anal_raw.py --outdir eval_results
+python evaluation/anal_raw.py --outdir eval_results
 ```
 
-**What it does:**
 - Processes raw judge JSON files
 - Counts wins/losses/ties per dimension
 - Generates per-model performance statistics
@@ -206,39 +175,32 @@ python anal_raw.py --outdir eval_results
 
 **Output:** Processed statistics and CSV files
 
-## Key Differences Summary
-
-| Evaluation File | Purpose | Scope | Judge | Output |
-|----------------|---------|-------|-------|---------|
-| `gpt_evaluation.py` | Full model comparison | All models, all dimensions | GPT-4o | Complete evaluation matrices |
-| `evaluate_f1.py` | Search quality | Search/retrieval only | None | F1 scores and overlap metrics |
-| `evaluation_react.py` | ReAct optimization | ReAct outputs only | None | ReAct-specific metrics |
-| `anal_raw.py` | Raw data processing | Post-evaluation analysis | None | Statistics and CSV files |
-
 ## Quick Start Workflow
 
 ```bash
 # 1. Crawl data
-cd Crawl_code && python APNews_crawler.py && python bbc_crawler.py
+python Crawl_code/APNews_crawler.py && python Crawl_code/bbc_crawler.py
 
 # 2. Process data
-cd Generate_json && python collect.py && python request.py
+python Generate_json/collect.py && python Generate_json/request.py
 
 # 3. Create dataset
-cd Statistic && python filter_english_news.py && python tokenize_and_combine_json.py
+python Statistic/filter_english_news.py && python Statistic/tokenize_and_combine_json.py
 
 # 4. Run ReAct
-cd react && python react_1_step.py
+python react/react_1_step.py
 
 # 5. Evaluate results
-cd evaluation && python gpt_evaluation.py
+python evaluation/LLM_evaluation.py
+python evaluation/1_step_evaluation.py
+python evaluation/2_step_evaluation.py
 ```
 
 ## Configuration
 
 ### Environment Variables
 ```bash
-export LLM_PROVIDER="DEEPINFRA"  # GPT, DEEPINFRA, or GEMINI
+export LLM_PROVIDER="DEEPINFRA"  # GPT, DEEPINFRA
 export LLM_MODEL="google/gemma-3-27b-it"
 export LLM_CONCURRENCY="3"
 export EVAL_CONCURRENCY="3"
@@ -248,7 +210,6 @@ export OPENAI_API_KEY="your_key_here"
 ### Supported Models
 - **OpenAI:** GPT-4o, GPT-4o-mini
 - **DeepInfra:** Google Gemma, Qwen, Meta Llama models
-- **Gemini:** Google's Gemini models
 
 ## Dependencies
 
@@ -256,12 +217,3 @@ export OPENAI_API_KEY="your_key_here"
 pip install fundus sentence-transformers openai pandas matplotlib ijson
 pip install torch transformers scipy numpy langdetect requests
 ```
-
-## Research Applications
-
-This system enables research in:
-- **Automated News Generation** using ReAct reasoning
-- **Content Quality Evaluation** across multiple dimensions
-- **Model Comparison** through systematic evaluation
-- **Semantic Search** for historical information retrieval
-- **Multi-step Reasoning** in news generation tasks
