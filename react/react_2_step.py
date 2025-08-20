@@ -352,7 +352,7 @@ async def call_llm_with_react_async(
     logging.info("report %s finished (tokens: %s)", report_id, stats["total_tokens"])
 
 async def main():
-    output_root = Path(f"output_async_100_{MODEL.split('/')[0]}")
+    output_root = Path(f"2_step_{MODEL.split('/')[0]}")
     output_root.mkdir(exist_ok=True)
 
     tasks: list[asyncio.Task[None]] = []
