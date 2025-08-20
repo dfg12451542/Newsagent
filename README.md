@@ -1,9 +1,5 @@
 # Newsagent: News Article Processing and Analysis System
 
-## Overview
-
-Newsagent is a comprehensive system for crawling, processing, analyzing, and evaluating news articles. The project focuses on news articles from BBC and AP News, with capabilities for semantic search, historical information retrieval, and automated news report generation using various AI models.
-
 ## Project Structure
 
 ```
