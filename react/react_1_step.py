@@ -299,7 +299,7 @@ async def call_llm_with_react_async(
 
 async def main():
     # Mirror code2's output directory naming
-    output_root = Path(f"output_async_react_{MODEL.split('/')[0]}")
+    output_root = Path(f"1_step_{MODEL.split('/')[0]}")
     output_root.mkdir(exist_ok=True)
 
     # Load the system prompt once
