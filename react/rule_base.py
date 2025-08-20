@@ -195,7 +195,7 @@ async def call_llm_with_react_async(
     logging.info("report %s finished", report_id)
 
 async def main():
-    output_root = Path("output_async_react_rule")
+    output_root = Path("rule_base")
     output_root.mkdir(exist_ok=True)
 
     tasks: List[asyncio.Task[None]] = []
