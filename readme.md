@@ -1,5 +1,59 @@
 # Newsagent: News Article Processing and Analysis System
 
+Newsagent is a benchmark and framework for evaluating how large language models (LLMs) and agentic systems can perform real-world newswriting tasks. The system simulates the workflow: given a news title, release date, and initial firsthand data, agents must:
+1. Identify narrative perspectives
+2. Search historical content (time-aware retrieval)
+3. Insert/remove contextual evidence
+4. Rephrase drafts into final news articles
+
+view of dataset:
+```
+{
+'0':
+{
+    "Title": "Harvey Weinstein is back on trial in New York. Jury selection begins Tuesday.",
+    "Firsthand_Information": (
+        "Firsthand_Information": {
+            "Speaker": [
+                {
+                    "Speaker": "Gloria Allred",
+                    "Text": "It’s painful, to go through the process again about a traumatic event.",
+                    "Citation": {
+                        "Paragraph": 5,
+                        "StartChar": 151,
+                        "EndChar": 207
+                    },
+                    "Encdoe":[]
+                },
+                {
+                    "Speaker": "Lindsay Goldbrum",
+                    "Text": "She is one of the bravest, strongest women that I have ever had the pleasure of knowing.",
+                    "Citation": {
+                        "Paragraph": 9,
+                        "StartChar": 40,
+                        "EndChar": 98
+                    },
+                    "Encdoe":[]
+                }
+            ],
+            "Description": [
+                {
+                    "Description": "Prosecutors have also added a new accuser in the retrial.",
+                    "Citation": {
+                        "Paragraph": 9,
+                        "StartChar": 0,
+                        "EndChar": 76
+                    },
+                    "Encdoe":[]
+                }
+            ],
+            "Image": []
+        },
+    )
+}
+}
+```
+
 ## Project Structure
 
 ```
