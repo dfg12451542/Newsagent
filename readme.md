@@ -1,5 +1,7 @@
 # Newsagent: News Article Processing and Analysis System
 
+Our dataset on osf : https://osf.io/nq83p/overview?view_only=c027289281964472aed2b8122ca46acc
+
 Newsagent is a benchmark and framework for evaluating how large language models (LLMs) and agentic systems can perform real-world newswriting tasks. The system simulates the workflow: given a news title, release date, and initial firsthand data, agents must:
 1. Identify narrative perspectives
 2. Search historical content (time-aware retrieval)
