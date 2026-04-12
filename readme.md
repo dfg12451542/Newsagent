@@ -1,6 +1,7 @@
 # Newsagent: News Article Processing and Analysis System
 
 Our dataset on osf : https://osf.io/nq83p/overview?view_only=c027289281964472aed2b8122ca46acc
+
 Download the zip file `report_dataset.zip` and unzip it to get the dataset `report_dataset.json`.
 Place the dataset file `report_dataset.json` under the main folder `/Newsagent`.
 
