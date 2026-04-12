@@ -1,6 +1,8 @@
 # Newsagent: News Article Processing and Analysis System
 
 Our dataset on osf : https://osf.io/nq83p/overview?view_only=c027289281964472aed2b8122ca46acc
+Download the zip file `report_dataset.zip` and unzip it to get the dataset `report_dataset.json`.
+Place the dataset file `report_dataset.json` under the main folder `/Newsagent`.
 
 Newsagent is a benchmark and framework for evaluating how large language models (LLMs) and agentic systems can perform real-world newswriting tasks. The system simulates the workflow: given a news title, release date, and initial firsthand data, agents must:
 1. Identify narrative perspectives
@@ -65,6 +67,7 @@ Newsagent/
 ├── Generate_json/        # Data preprocessing and JSON generation
 ├── react/               # ReAct-based news generation system
 ├── Statistic/           # Data analysis and statistics
+├── report_dataset.json
 └── README.md
 ```
 
