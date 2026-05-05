@@ -1,0 +1,11 @@
+model,wins,losses,ties,matches,win_rate_%,tie_rate_%
+1_step_gemma-3-27b-it,4,0,5,9,44.44,55.56
+2_step_Qwen3-32B,4,0,5,9,44.44,55.56
+2_step_gpt-4o-mini,3,0,6,9,33.33,66.67
+1_step_gpt-4o-mini,2,2,5,9,22.22,55.56
+1_step_gpt-4o,2,0,7,9,22.22,77.78
+rulebase,1,4,4,9,11.11,44.44
+2_step_gemma-3-27b-it,1,1,7,9,11.11,77.78
+2_step_gpt-4o,1,0,8,9,11.11,88.89
+reference,0,8,1,9,0.0,11.11
+2_step_Llama-4-Scout-17B-16E-Instruct,0,3,6,9,0.0,66.67

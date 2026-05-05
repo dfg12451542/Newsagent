@@ -1,0 +1,58 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent that follows a Thought → Action → Observation loop to build a coherent, multimodal draft step by step.\n\nYour goal is to construct a complete news draft, 'insert' only evidence retrieved from the observation 'search', the data from user prompt can't be inserted.\nAt each step, your task is to output only the next Thought and Action — the system will return the Observation separately after your Action.\nEach loop must produce ONLY the following structure — NO EXCEPTIONS\nAt every step, follow this strict loop format to output a json format:\n\nThought: Describe your next plan and reasoning.\nAction: A JSON object in the form by outputting:\n{\n  \"Thought\": \"<Your thought>\"\n  \"Action\": \"<one of: search | insert | remove | terminate>\",\n}\nObservation: The result from the system based on your action.\n\nRepeat this loop until you decide to terminate the process by outputting:\n\n{\n   \"Thought\": \"<Your thought>\",\n   \"Action\": \"terminate\",\n   \"query\": {},\n}\n\nYou MUST adhere to the following constraints:\n- DO NOT perform more than one action per step.\n- DO NOT output multiple actions in a single response.\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft.\n\nAvailable Actions:\n\n1. search  \n• Perform semantic search across the dataset (Firsthand_Information + Historical_Information)  \n• Required fields: query\n• Example:\n{\n  \"Thought\": \"I will search for reactions to Sue Gray's report to gather insights.\",\n  \"Action\": \"search\",\n  \"query\": {\n    \"text\": \"Sue Gray report reaction\"\n  }\n}\n\n2. insert  \n• Only can be done after \"search\" is done\n• Insert one previously searched object into the draft  \n• Required fields: obj (must match one in previous Observation)  \n• Example:\n{\n  \"Thought\": \"The search result provided a crucial quote on Sue Gray's report that I will insert into the draft.\",\n  \"Action\": \"insert\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\n3. remove  \n• Remove an inserted object by ID or Speaker  \n• Required field: object_id  \n• Example:\n{\n  \"Thought\": \"<Your thought>\" \n  \"Action\": \"remove\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\nLoop until you issue `\"Action\": \"terminate\"`.\n{\n   \"Thought\": \"<Your thought>\"\n   \"Action\": \"terminate\",\n   \"query\": {}\n}\n\nAt the end, the draft will be saved and evaluated. Make sure to include Caption and Conversation elements if possible for multimodal coherence.\n\nYou MUST adhere to the following constraints:\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft."
+  },
+  {
+    "role": "user",
+    "content": "Title: World Superbikes: Toprak Razgatlioglu moves into championship lead with Donington Park treble\nDate: 2025-07-13\nFirsthand information: {'Speaker': [], 'Description': [{'Description': 'Toprak Razgatlioglu moved into the lead of the World Superbike Championship by winning the second feature race at Donington Park.', 'Citation': {'Paragraph': 1, 'StartChar': 0, 'EndChar': 97}}, {'Description': 'BMW rider Razgatlioglu had earlier closed to within one point of title rival Nicolo Bulega by winning the Superpole sprint race ahead of the Ducati rider.', 'Citation': {'Paragraph': 2, 'StartChar': 0, 'EndChar': 137}}, {'Description': \"With his dominant victory in Sunday's feature race, reigning champion Razgatlioglu now leads the championship by four points ahead of Bulega, who was second.\", 'Citation': {'Paragraph': 3, 'StartChar': 0, 'EndChar': 152}}, {'Description': 'Alvaro Bautista completed the podium ahead of Danilo Petrucci and Andrea Locatelli.', 'Citation': {'Paragraph': 4, 'StartChar': 0, 'EndChar': 77}}, {'Description': \"Northern Ireland's six-time champion Jonathan Rea, who collected his best finish of the season in fifth on Saturday, claimed the final point on offer in 15th place.\", 'Citation': {'Paragraph': 5, 'StartChar': 0, 'EndChar': 151}}, {'Description': \"Sunday's win was a third victory of the weekend for the Turkish rider after he won Saturday's opening feature race and the Superpole.\", 'Citation': {'Paragraph': 6, 'StartChar': 0, 'EndChar': 120}}], 'Image': [{'ID': 'image_1', 'Caption': 'Toprak Razgatlioglu '}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will start by searching for more information about Nicolo Bulega's performance and reaction to Razgatlioglu taking the championship lead. This will add context to the article.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Nicolo Bulega reaction to Razgatlioglu Donington Park\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Toprak Razgatlioglu in action at Donington Park\", \"score\": 0.6796237230300903}, {\"text\": \"Razgatlioglu won by six seconds and is now four points in the standings behind leader Nicolo Bulega, who was second on his Ducati.\", \"score\": 0.5413074493408203}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"Now that I have found a relevant search result, I'll insert the quote about the point difference between Razgatlioglu and Bulega. This provides a key detail regarding the championship standings.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Razgatlioglu won by six seconds and is now four points in the standings behind leader Nicolo Bulega, who was second on his Ducati.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will now search for details about Alvaro Bautista's performance during the Donington Park races to add more depth to the race results section.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Alvaro Bautista Donington Park World Superbikes\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Toprak Razgatlioglu won the opening World Superbike race at Donington Park as Jonathan Rea picked up his best finish of the season in fifth.\", \"score\": 0.5626473426818848}, {\"text\": \"Joao Pedro of Brighton & Hove Albion \", \"score\": 0.5175032615661621}, {\"text\": \"Chelsea Joao Pedro\", \"score\": 0.5157349109649658}, {\"text\": \"Rangers' Max Aarons, Joe Rothwell and Emmanuel Fernandez\", \"score\": 0.5129479169845581}, {\"text\": \"Emmanuel Fernandez in action for Peterborough United\", \"score\": 0.5023170709609985}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"The search results about Alvaro Bautista are not very informative. I'll search for information about Jonathan Rea's performance, given that the provided text mentions his best finish this season.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Jonathan Rea Donington Park World Superbikes\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Toprak Razgatlioglu won the opening World Superbike race at Donington Park as Jonathan Rea picked up his best finish of the season in fifth.\", \"score\": 0.7399890422821045}, {\"text\": \"Thomas Rew\", \"score\": 0.5008722543716431}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will now insert the information about Jonathan Rea achieving his best finish of the season at Donington Park. This adds a human interest element to the report.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Toprak Razgatlioglu won the opening World Superbike race at Donington Park as Jonathan Rea picked up his best finish of the season in fifth.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"Now I will search for additional details about Toprak Razgatlioglu's dominant performance throughout the weekend to emphasize his success.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Toprak Razgatlioglu dominant Donington Park\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Toprak Razgatlioglu in action at Donington Park\", \"score\": 0.876304030418396}, {\"text\": \"Toprak Razgatlioglu won the opening World Superbike race at Donington Park as Jonathan Rea picked up his best finish of the season in fifth.\", \"score\": 0.6017686724662781}]}"
+  }
+]

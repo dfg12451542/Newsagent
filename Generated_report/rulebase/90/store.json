@@ -1,0 +1,50 @@
+[
+  {
+    "section": "default",
+    "content": {
+      "text": "Police are appealing for anyone with information to contact them.",
+      "score": 1.0
+    },
+    "source": "search"
+  },
+  {
+    "section": "default",
+    "content": {
+      "text": "Det Supt Jim Munro: appealed for anyone with any information to contact the police.",
+      "score": 0.8770731091499329
+    },
+    "source": "search"
+  },
+  {
+    "section": "default",
+    "content": {
+      "text": "Police are appealing for witnesses to contact them.",
+      "score": 0.8599839210510254
+    },
+    "source": "search"
+  },
+  {
+    "section": "default",
+    "content": {
+      "text": "Police have appealed for information.",
+      "score": 0.8458283543586731
+    },
+    "source": "search"
+  },
+  {
+    "section": "default",
+    "content": {
+      "text": "Belfast city councillor Arder Carson: the fire was \"a pure act of deliberate vandalism that fills you with despair\".",
+      "score": 0.8446322679519653
+    },
+    "source": "search"
+  },
+  {
+    "section": "default",
+    "content": {
+      "text": "Belfast city councillor Arder Carson: the fire was \"a pure act of deliberate vandalism that fills you with despair\".",
+      "score": 0.8446322679519653
+    },
+    "source": "search"
+  }
+]

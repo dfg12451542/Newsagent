@@ -1,0 +1,50 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent that follows a Thought → Action → Observation loop to build a coherent, multimodal draft step by step.\n\nYour goal is to construct a complete news draft, 'insert' only evidence retrieved from the observation 'search', the data from user prompt can't be inserted.\nAt each step, your task is to output only the next Thought and Action — the system will return the Observation separately after your Action.\nEach loop must produce ONLY the following structure — NO EXCEPTIONS\nAt every step, follow this strict loop format to output a json format:\n\nThought: Describe your next plan and reasoning.\nAction: A JSON object in the form by outputting:\n{\n  \"Thought\": \"<Your thought>\"\n  \"Action\": \"<one of: search | insert | remove | terminate>\",\n}\nObservation: The result from the system based on your action.\n\nRepeat this loop until you decide to terminate the process by outputting:\n\n{\n   \"Thought\": \"<Your thought>\",\n   \"Action\": \"terminate\",\n   \"query\": {},\n}\n\nYou MUST adhere to the following constraints:\n- DO NOT perform more than one action per step.\n- DO NOT output multiple actions in a single response.\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft.\n\nAvailable Actions:\n\n1. search  \n• Perform semantic search across the dataset (Firsthand_Information + Historical_Information)  \n• Required fields: query\n• Example:\n{\n  \"Thought\": \"I will search for reactions to Sue Gray's report to gather insights.\",\n  \"Action\": \"search\",\n  \"query\": {\n    \"text\": \"Sue Gray report reaction\"\n  }\n}\n\n2. insert  \n• Only can be done after \"search\" is done\n• Insert one previously searched object into the draft  \n• Required fields: obj (must match one in previous Observation)  \n• Example:\n{\n  \"Thought\": \"The search result provided a crucial quote on Sue Gray's report that I will insert into the draft.\",\n  \"Action\": \"insert\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\n3. remove  \n• Remove an inserted object by ID or Speaker  \n• Required field: object_id  \n• Example:\n{\n  \"Thought\": \"<Your thought>\" \n  \"Action\": \"remove\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\nLoop until you issue `\"Action\": \"terminate\"`.\n{\n   \"Thought\": \"<Your thought>\"\n   \"Action\": \"terminate\",\n   \"query\": {}\n}\n\nAt the end, the draft will be saved and evaluated. Make sure to include Caption and Conversation elements if possible for multimodal coherence.\n\nYou MUST adhere to the following constraints:\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft."
+  },
+  {
+    "role": "user",
+    "content": "Title: The Open: Welcome to Portrush\nDate: 2025-07-14\nFirsthand information: {'Speaker': [], 'Description': [{'Description': 'The best golfers in the world have descended on the Northern Irish town of Portrush for the 153rd Open Championship.', 'Citation': {'Paragraph': 1, 'StartChar': 0, 'EndChar': 89}}, {'Description': \"This page will be your dedicated resource for everything from the Open Championship as BBC Sport takes you through every twist and turn in the crowning of 2025's 'Champion Golfer of the Year'.\", 'Citation': {'Paragraph': 3, 'StartChar': 0, 'EndChar': 177}}, {'Description': \"Alongside our live radio and text coverage throughout the week, we'll aim to bring you some of the press conferences from the likes of Rory McIlroy and defending champion Xander Schauffele alongside expert analysis from our golf correspondent Iain Carter and reporters on the course.\", 'Citation': {'Paragraph': 4, 'StartChar': 0, 'EndChar': 242}}, {'Description': \"Just hit the 'follow' button on website or app to add it to your 'MySport' feed.\", 'Citation': {'Paragraph': 5, 'StartChar': 0, 'EndChar': 75}}], 'Image': [{'ID': 'image_1', 'Caption': 'The Open Championship at Royal Portrush'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will search for historical context about the Open Championship at Royal Portrush to provide background information.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Open Championship Royal Portrush history\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"The Open Championship takes place at Royal Portrush in Northern Ireland from 17-20 July.\", \"score\": 0.7433260679244995}, {\"text\": \"From July 17 to 20, the Open Championship will be held at Royal Portrush in Northern Ireland.\", \"score\": 0.7382571697235107}, {\"text\": \"The Open Championship will take place at Royal Portrush from July 13 to July 20, 2025.\", \"score\": 0.7142250537872314}, {\"text\": \"The third Open Championship is being hosted by Royal Portrush, located on the northern coast of Northern Ireland.\", \"score\": 0.7077933549880981}, {\"text\": \"The third Open Championship is being hosted by Royal Portrush, located on the northern coast of Northern Ireland.\", \"score\": 0.7077933549880981}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will insert the information that the Open Championship is taking place at Royal Portrush in Northern Ireland to provide historical context.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"The Open Championship takes place at Royal Portrush in Northern Ireland from 17-20 July.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"To offer a comprehensive understanding, I will search for background information on participant golfers like Rory McIlroy and Xander Schauffele mentioned in the firsthand data.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Rory McIlroy Xander Schauffele Open Championship 2025\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"The American golfer Xander Schauffele, who triumphed at Royal Troon in Scotland in 2024, is the reigning champion of The Open.\", \"score\": 0.7692480087280273}, {\"text\": \"American golfer Xander Schauffele, who claimed victory at Royal Troon in Scotland in 2024, is the reigning champion of The Open.\", \"score\": 0.7646194696426392}, {\"text\": \"The defending champion at The Open is American golfer Xander Schauffle who won at Royal Troon in Scotland in 2024..\", \"score\": 0.7380180358886719}, {\"text\": \"The defending champion at The Open is American golfer Xander Schauffle who won at Royal Troon in Scotland in 2024..\", \"score\": 0.7380180358886719}, {\"text\": \"Rory McIlroy\", \"score\": 0.6807085275650024}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will insert the information that Xander Schauffele is the reigning champion to provide insight into his participation in the Open Championship.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"The American golfer Xander Schauffele, who triumphed at Royal Troon in Scotland in 2024, is the reigning champion of The Open.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I need to include insights or statements from Rory McIlroy related to the Open Championship to enrich the narrative.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Rory McIlroy statements 2025 Open Championship\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Rory McIlroy\", \"score\": 0.7112870216369629}, {\"text\": \"Rory McIlroy\", \"score\": 0.7112870216369629}, {\"text\": \"Rory McIlroy\", \"score\": 0.7112870216369629}, {\"text\": \"Rory McIlroy's news conference scheduled for 14:00 BST\", \"score\": 0.6796820163726807}, {\"text\": \"Excitement will be heightened as Rory McIlroy, a Masters champion who has won the Grand Slam, represents Northern Ireland. Additionally, this is the location where Shane Lowry, an Irishman, achieved a remarkable Open win in 2019.\", \"score\": 0.6755586862564087}]}"
+  }
+]

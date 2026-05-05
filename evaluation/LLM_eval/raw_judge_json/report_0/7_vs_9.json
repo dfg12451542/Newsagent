@@ -1,0 +1,42 @@
+{
+  "i": 7,
+  "j": 9,
+  "label_i": "rulebase",
+  "label_j": "reference",
+  "flipped_presentation": true,
+  "report_id": 0,
+  "result": {
+    "Factual Consistency": {
+      "winner": "tie",
+      "reasoning": "Both articles provide consistent factual information about the festival and the Old Station."
+    },
+    "Logical Consistency": {
+      "winner": "first",
+      "reasoning": "The first article presents a more coherent narrative with a clear introduction and conclusion."
+    },
+    "Importance": {
+      "winner": "second",
+      "reasoning": "The second article adds the detail about Charlie Cooper as the festival ambassador, which may be of interest to readers."
+    },
+    "Readability": {
+      "winner": "first",
+      "reasoning": "The first article is better structured with clear paragraphs, making it easier to read."
+    },
+    "Objectivity": {
+      "winner": "tie",
+      "reasoning": "Both articles maintain a neutral tone and focus on factual reporting."
+    },
+    "Journalistic": {
+      "winner": "first",
+      "reasoning": "The first article adheres more closely to journalistic standards with a clear lead and structured flow."
+    },
+    "Information Density": {
+      "winner": "second",
+      "reasoning": "The second article provides additional information about the festival's ambassador, increasing its information density."
+    },
+    "Overall": {
+      "winner": "first",
+      "reasoning": "The first article is more logically consistent, readable, and adheres better to journalistic standards, making it the stronger overall piece."
+    }
+  }
+}

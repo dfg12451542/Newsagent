@@ -1,0 +1,42 @@
+{
+  "i": 1,
+  "j": 5,
+  "label_i": "1_step_gemma-3-27b-it",
+  "label_j": "2_step_Qwen3-32B",
+  "flipped_presentation": true,
+  "report_id": 0,
+  "result": {
+    "Factual Consistency": {
+      "winner": "tie",
+      "reasoning": "Both articles provide consistent factual details about the festival, the station's history, and the events planned."
+    },
+    "Logical Consistency": {
+      "winner": "tie",
+      "reasoning": "Both articles are logically structured, presenting information in a coherent manner."
+    },
+    "Importance": {
+      "winner": "tie",
+      "reasoning": "Both articles cover the same event and provide similar levels of detail about the festival's significance."
+    },
+    "Readability": {
+      "winner": "second",
+      "reasoning": "The second article is slightly more concise and straightforward, making it easier to read."
+    },
+    "Objectivity": {
+      "winner": "tie",
+      "reasoning": "Both articles maintain a neutral tone, focusing on factual reporting without opinion."
+    },
+    "Journalistic": {
+      "winner": "tie",
+      "reasoning": "Both articles adhere to journalistic standards, providing quotes, context, and relevant details."
+    },
+    "Information Density": {
+      "winner": "first",
+      "reasoning": "The first article includes additional details about the festival's activities and the station's refurbishment."
+    },
+    "Overall": {
+      "winner": "first",
+      "reasoning": "The first article provides more comprehensive coverage with additional context and details, making it more informative overall."
+    }
+  }
+}

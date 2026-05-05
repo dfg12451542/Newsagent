@@ -1,0 +1,18 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent.\nYour job is to search for 'historical information' and insert the important ones into 'current draft'.\n\nYou are given report title, firsthand information of the report, searching record, current draft.\n\nCheck the current draft and choose an action to execute <search/insert/terminate>\n\nsearch : search an information and but it into the searching record\ninsert : insert a query from searching record to current draft\n\nterminate : end the task and output the current draft\n\nNotice:\n- only the query from searching record can be output.\n- do not insert information that already in the current draft.\n\n***Only output the action <search/insert/terminate> you want to execute (only output a word)***\n***Do not output anything else except the action***\n***Do not output any  thought***"
+  },
+  {
+    "role": "user",
+    "content": "Title: Kirsty Maclean: Liverpool sign Scotland midfielder from Rangers\nDate: 2025-07-14\nFirsthand information: {'Speaker': [{'Speaker': 'Kirsty Maclean', 'Text': 'The Rangers academy product, who made over 100 appearances for the Glasgow club, said it was the \"right time for a new challenge and to take the next step\".', 'Citation': {'Paragraph': 2, 'StartChar': 0, 'EndChar': 117}}, {'Speaker': 'Kirsty Maclean', 'Text': 'She said: \"I think the club speaks for itself. It\\'s obviously a massive club with a lot of history and to be able to represent the badge is a really proud moment for me.', 'Citation': {'Paragraph': 4, 'StartChar': 0, 'EndChar': 155}}, {'Speaker': 'Kirsty Maclean', 'Text': '\"I\\'m a midfielder who likes to be on the ball and tries to make things happen so hopefully I can link up with the players in front of me and we can try to score lots of goals this season.\"', 'Citation': {'Paragraph': 5, 'StartChar': 0, 'EndChar': 166}}], 'Description': [{'Description': 'Liverpool have signed 20-year-old Scotland midfielder Kirsty Maclean from Rangers.', 'Citation': {'Paragraph': 1, 'StartChar': 0, 'EndChar': 68}}], 'Image': [{'ID': 'image_1', 'Caption': 'Kirsty Maclean playing for Scotland'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "searching record : ['Kirsty Maclean representing Scotland in play.', 'Kirsty Maclean representing Scotland in play.', 'Earlier this year, the club announced she was its Premier League Communities Captain for 2025.', 'Kirsty Maclean representing Scotland in play.', 'Kirsty Maclean representing Scotland in play.', 'Kirsty Maclean representing Scotland in play.', 'The transfer fee agreed with Como for Celtic winger Nicolas Kuhn is £16.5m, with the clubs ironing out the finer details of potential add-ons.', 'Kirsty Maclean representing Scotland in play.', 'Kirsty Maclean representing Scotland in play.', 'In 2020, he transferred to Liverpool FC, where he contributed to their victory in the Premier League title the previous season.']\ncurrent draft : [{'section': 'default', 'content': 'Kirsty Maclean representing Scotland in play.', 'source': 'search'}, {'section': 'default', 'content': 'Earlier this year, the club announced she was its Premier League Communities Captain for 2025.', 'source': 'search'}, {'section': 'default', 'content': 'Kirsty Maclean representing Scotland in play.', 'source': 'search'}]"
+  },
+  {
+    "role": "system",
+    "content": "Kirsty Maclean Liverpool signing details 2025"
+  }
+]

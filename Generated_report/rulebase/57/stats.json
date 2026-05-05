@@ -1,0 +1,11 @@
+{
+  "action_counts": {
+    "search": 3,
+    "insert": 0
+  },
+  "insert_fail_count": 0,
+  "all_time = ": 15.709209680557251,
+  "avg_search_time": 5.233665704727173,
+  "avg_insert_time": 0.0,
+  "write_time": 2.8133392333984375e-05
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent.\nYour job is to search for 'historical information' and insert the important ones into 'current draft'.\n\nYou are given report title, firsthand information of the report, searching record, current draft.\n\nCheck the current draft and choose an action to execute <search/insert/terminate>\n\nsearch : search an information and but it into the searching record\ninsert : insert a query from searching record to current draft\n\nterminate : end the task and output the current draft\n\nNotice:\n- only the query from searching record can be output.\n- do not insert information that already in the current draft.\n\n***Only output the action <search/insert/terminate> you want to execute (only output a word)***\n***Do not output anything else except the action***\n***Do not output any  thought***"
+  },
+  {
+    "role": "user",
+    "content": "Title: The Wurzels end gig abruptly as band members fall ill\nDate: 2025-07-14\nFirsthand information: {'Speaker': [{'Speaker': 'Tommy Banner', 'Text': 'Both Pete and I appear to have fully recovered from sun and heat exhaustion. Up on stage there was no air moving and we were facing straight into the direct, unobstructed rays of a very strong sun.', 'Citation': {'Paragraph': 2, 'StartChar': 131, 'EndChar': 313}}, {'Speaker': 'Tommy Banner', 'Text': 'I was about to announce the last song and Pete wasn’t besides me where he normally is. He was in a bad way.', 'Citation': {'Paragraph': 4, 'StartChar': 17, 'EndChar': 116}}, {'Speaker': 'Tommy Banner', 'Text': 'Both Pete and I appear to have fully recovered from sun and heat exhaustion.', 'Citation': {'Paragraph': 2, 'StartChar': 131, 'EndChar': 198}}], 'Description': [{'Description': 'The Wurzels had to end their gig abruptly because the band\\'s singer was \"in a bad way\" as temperatures peaked at 31C.', 'Citation': {'Paragraph': 1, 'StartChar': 0, 'EndChar': 90}}, {'Description': 'Pete Budd, who turns 85 on 18 July, had to leave Party at the Palace stage in Wells, Somerset, on Saturday before the end of the set.', 'Citation': {'Paragraph': 2, 'StartChar': 0, 'EndChar': 114}}, {'Description': 'Accordionist Tommy Banner said he also felt sunstroke and experienced dizziness after going off stage.', 'Citation': {'Paragraph': 2, 'StartChar': 115, 'EndChar': 130}}, {'Description': 'Mr Banner and Mr Budd were supported by medical staff when they left the stage.', 'Citation': {'Paragraph': 3, 'StartChar': 0, 'EndChar': 71}}, {'Description': 'A nurse then arrived and checked both band members over, gave Mr Banner some exercises to do, and advised him not to drive.', 'Citation': {'Paragraph': 6, 'StartChar': 0, 'EndChar': 111}}], 'Image': [{'ID': 'image_1', 'Caption': \"Pete Budd from The Wurzels dressed in a white shirt with brown waistcoat, holding a banjo and singing into a mic. There's stage set and lights behind him inside a green lit marquee\"}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "searching record : ['This week, Somerset is undergoing another heatwave, with temperatures soaring to 31C.', 'As part of their acclaimed 2025 tour, the boys from Burnage are scheduled to take the stage at Heaton Park in the city on five different dates.']\ncurrent draft : []"
+  },
+  {
+    "role": "system",
+    "content": "The Wurzels band members health update 2025"
+  }
+]

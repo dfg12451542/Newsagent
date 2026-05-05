@@ -1,0 +1,62 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent that follows a Thought → Action → Observation loop to build a coherent, multimodal draft step by step.\n\nYour goal is to construct a complete news draft, 'insert' only evidence retrieved from the observation 'search', the data from user prompt can't be inserted.\nAt each step, your task is to output only the next Thought and Action — the system will return the Observation separately after your Action.\nEach loop must produce ONLY the following structure — NO EXCEPTIONS\nAt every step, follow this strict loop format to output a json format:\n\nThought: Describe your next plan and reasoning.\nAction: A JSON object in the form by outputting:\n{\n  \"Thought\": \"<Your thought>\"\n  \"Action\": \"<one of: search | insert | remove | terminate>\",\n}\nObservation: The result from the system based on your action.\n\nRepeat this loop until you decide to terminate the process by outputting:\n\n{\n   \"Thought\": \"<Your thought>\",\n   \"Action\": \"terminate\",\n   \"query\": {},\n}\n\nYou MUST adhere to the following constraints:\n- DO NOT perform more than one action per step.\n- DO NOT output multiple actions in a single response.\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft.\n\nAvailable Actions:\n\n1. search  \n• Perform semantic search across the dataset (Firsthand_Information + Historical_Information)  \n• Required fields: query\n• Example:\n{\n  \"Thought\": \"I will search for reactions to Sue Gray's report to gather insights.\",\n  \"Action\": \"search\",\n  \"query\": {\n    \"text\": \"Sue Gray report reaction\"\n  }\n}\n\n2. insert  \n• Only can be done after \"search\" is done\n• Insert one previously searched object into the draft  \n• Required fields: obj (must match one in previous Observation)  \n• Example:\n{\n  \"Thought\": \"The search result provided a crucial quote on Sue Gray's report that I will insert into the draft.\",\n  \"Action\": \"insert\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\n3. remove  \n• Remove an inserted object by ID or Speaker  \n• Required field: object_id  \n• Example:\n{\n  \"Thought\": \"<Your thought>\" \n  \"Action\": \"remove\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\nLoop until you issue `\"Action\": \"terminate\"`.\n{\n   \"Thought\": \"<Your thought>\"\n   \"Action\": \"terminate\",\n   \"query\": {}\n}\n\nAt the end, the draft will be saved and evaluated. Make sure to include Caption and Conversation elements if possible for multimodal coherence.\n\nYou MUST adhere to the following constraints:\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft."
+  },
+  {
+    "role": "user",
+    "content": "Title: Live Aid at 40: 'My Wednesbury father was an unsung hero of the concert'\nDate: 2025-07-13\nFirsthand information: {'Speaker': [{'Speaker': \"Nicola (Maurice Jones's daughter)\", 'Text': '\"He was very modest. His take on it was that he was there to do a job, he wasn\\'t there to be in the limelight. He did play an important part,\" she told BBC WM.', 'Citation': {'Paragraph': 6, 'StartChar': 0, 'EndChar': 137}}, {'Speaker': \"Nicola (Maurice Jones's daughter)\", 'Text': '\"I think, because of my dad\\'s nature, he didn\\'t want to promote himself even though he was very good at promoting bands and acts.\"', 'Citation': {'Paragraph': 7, 'StartChar': 0, 'EndChar': 119}}, {'Speaker': \"Nicola (Maurice Jones's daughter)\", 'Text': 'She said she was sitting in the royal box – a row behind David Bowie and two rows behind Princess Diana and Prince Charles – adding: \"I was very lucky.\"', 'Citation': {'Paragraph': 9, 'StartChar': 0, 'EndChar': 157}}, {'Speaker': \"Nicola (Maurice Jones's daughter)\", 'Text': \"She also spoke about seeing stars including Paul McCartney, Elton John and Adam Ant backstage, as well as the crowd's reaction to Freddie Mercury's legendary performance.\", 'Citation': {'Paragraph': 10, 'StartChar': 0, 'EndChar': 156}}, {'Speaker': \"Nicola (Maurice Jones's daughter)\", 'Text': '\"Watching the reaction of the audience was really spectacular,\" she added.', 'Citation': {'Paragraph': 11, 'StartChar': 0, 'EndChar': 70}}, {'Speaker': \"Nicola (Maurice Jones's daughter)\", 'Text': '\"I sort of knew who Queen were but I wasn\\'t that familiar with them – it was then I realised what a huge band they were.\"', 'Citation': {'Paragraph': 12, 'StartChar': 0, 'EndChar': 105}}, {'Speaker': \"Nicola (Maurice Jones's daughter)\", 'Text': 'She said the atmosphere both in the audience and backstage, throughout the event, was \"wonderful\", adding that her jaw \"must have dropped to the floor\".', 'Citation': {'Paragraph': 13, 'StartChar': 0, 'EndChar': 129}}, {'Speaker': \"Nicola (Maurice Jones's daughter)\", 'Text': 'Ms Jones said she was \"very proud\" of her dad and now wanted him to be remembered for his contribution.', 'Citation': {'Paragraph': 15, 'StartChar': 0, 'EndChar': 88}}, {'Speaker': \"Nicola (Maurice Jones's daughter)\", 'Text': '\"It will be nice if he is remembered in a small way,\" she said.', 'Citation': {'Paragraph': 16, 'StartChar': 0, 'EndChar': 51}}], 'Description': [{'Description': 'Mr Jones, who was born in Wednesbury and lived in Walsall, was approached to help with the event because of his connections in the industry, according to his daughter Nicola.', 'Citation': {'Paragraph': 4, 'StartChar': 0, 'EndChar': 160}}, {'Description': 'She said her father, who died in 2009, was involved with aspects of Live Aid including organising the venue, backstage catering and booking the bands.', 'Citation': {'Paragraph': 5, 'StartChar': 0, 'EndChar': 120}}, {'Description': 'Ms Jones went to the Wembley concert with her dad when she was 15.', 'Citation': {'Paragraph': 8, 'StartChar': 0, 'EndChar': 61}}], 'Image': [{'ID': 'image_1', 'Caption': 'An old photograph of a man with dark hair, a dark beard, a white shirt and a camera around his neck, holding a glass while looking at the camera. He is standing next to a plant.'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"Let's initiate by searching for historical information about Live Aid to complement the firsthand account.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Live Aid historical details\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Live Aid was watched by approximately two billion people in more than 100 countries.\", \"score\": 0.6372159719467163}, {\"text\": \"Approximately two billion people in over 100 countries watched Live Aid.\", \"score\": 0.5586790442466736}, {\"text\": \"Sue, 61, from Chichester, West Sussex, was another one of a select few to secure a ticket for Live Aid.\", \"score\": 0.5115541219711304}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will insert the historical context about Live Aid being watched by approximately two billion people in more than 100 countries.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Live Aid was watched by approximately two billion people in more than 100 countries.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I should search for more specific details regarding Maurice Jones's role in Live Aid to add depth to the draft.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Maurice Jones Live Aid role\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"However, rarely acknowledged is Maurice Jones, a rock promoter based in the West Midlands, whose name was even featured prominently at the top of the event's ticket.\", \"score\": 0.5331267714500427}, {\"text\": \"However, a person who is rarely acknowledged is Maurice Jones, a rock promoter from the West Midlands, whose name was featured prominently at the top of the event's ticket.\", \"score\": 0.5232696533203125}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will insert the information about Maurice Jones being a rarely acknowledged figure despite his name being prominently featured on the event's ticket.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"However, rarely acknowledged is Maurice Jones, a rock promoter based in the West Midlands, whose name was even featured prominently at the top of the event's ticket.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Error\": \"output format error, must fit json format.\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"To enhance the narrative, I will also verify and gather information on the specific concerts or acts organized by Maurice Jones for Live Aid.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Maurice Jones Live Aid concerts organized\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"However, rarely acknowledged is Maurice Jones, a rock promoter based in the West Midlands, whose name was even featured prominently at the top of the event's ticket.\", \"score\": 0.6817100048065186}, {\"text\": \"However, a person who is rarely acknowledged is Maurice Jones, a rock promoter from the West Midlands, whose name was featured prominently at the top of the event's ticket.\", \"score\": 0.6581282615661621}, {\"text\": \"In addition to orchestrating Live Aid, Mr. Jones played a significant role in establishing the Monsters of Rock festival, which has later evolved into Download Festival.\", \"score\": 0.5826002955436707}, {\"text\": \"In addition to organizing Live Aid, Mr. Jones played a role in establishing the Monsters of Rock festival, which has evolved into Download Festival.\", \"score\": 0.576183557510376}, {\"text\": \"He mentioned that the 40th anniversary of Live Aid, the iconic concert from 1985 that brought musicians together at Wembley for a charitable cause, motivated him to compile the anthology.\", \"score\": 0.5213515758514404}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will insert the detail of Maurice Jones's contribution in orchestrating Live Aid and mention his role in the establishment of the Monsters of Rock festival.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"In addition to orchestrating Live Aid, Mr. Jones played a significant role in establishing the Monsters of Rock festival, which has later evolved into Download Festival.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  }
+]

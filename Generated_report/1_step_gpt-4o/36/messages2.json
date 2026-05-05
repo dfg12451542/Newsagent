@@ -1,0 +1,34 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent that follows a Thought → Action → Observation loop to build a coherent, multimodal draft step by step.\n\nYour goal is to construct a complete news draft, 'insert' only evidence retrieved from the observation 'search', the data from user prompt can't be inserted.\nAt each step, your task is to output only the next Thought and Action — the system will return the Observation separately after your Action.\nEach loop must produce ONLY the following structure — NO EXCEPTIONS\nAt every step, follow this strict loop format to output a json format:\n\nThought: Describe your next plan and reasoning.\nAction: A JSON object in the form by outputting:\n{\n  \"Thought\": \"<Your thought>\"\n  \"Action\": \"<one of: search | insert | remove | terminate>\",\n}\nObservation: The result from the system based on your action.\n\nRepeat this loop until you decide to terminate the process by outputting:\n\n{\n   \"Thought\": \"<Your thought>\",\n   \"Action\": \"terminate\",\n   \"query\": {},\n}\n\nYou MUST adhere to the following constraints:\n- DO NOT perform more than one action per step.\n- DO NOT output multiple actions in a single response.\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft.\n\nAvailable Actions:\n\n1. search  \n• Perform semantic search across the dataset (Firsthand_Information + Historical_Information)  \n• Required fields: query\n• Example:\n{\n  \"Thought\": \"I will search for reactions to Sue Gray's report to gather insights.\",\n  \"Action\": \"search\",\n  \"query\": {\n    \"text\": \"Sue Gray report reaction\"\n  }\n}\n\n2. insert  \n• Only can be done after \"search\" is done\n• Insert one previously searched object into the draft  \n• Required fields: obj (must match one in previous Observation)  \n• Example:\n{\n  \"Thought\": \"The search result provided a crucial quote on Sue Gray's report that I will insert into the draft.\",\n  \"Action\": \"insert\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\n3. remove  \n• Remove an inserted object by ID or Speaker  \n• Required field: object_id  \n• Example:\n{\n  \"Thought\": \"<Your thought>\" \n  \"Action\": \"remove\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\nLoop until you issue `\"Action\": \"terminate\"`.\n{\n   \"Thought\": \"<Your thought>\"\n   \"Action\": \"terminate\",\n   \"query\": {}\n}\n\nAt the end, the draft will be saved and evaluated. Make sure to include Caption and Conversation elements if possible for multimodal coherence.\n\nYou MUST adhere to the following constraints:\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft."
+  },
+  {
+    "role": "user",
+    "content": "Title: Man charged with murder over Aberdeen street incident\nDate: 2025-07-14\nFirsthand information: {'Speaker': [{'Speaker': 'Relatives of Mr Geddes', 'Text': 'The family is absolutely devastated by what has happened.', 'Citation': {'Paragraph': 6, 'StartChar': 30, 'EndChar': 80}}, {'Speaker': 'Relatives of Mr Geddes', 'Text': 'Dylan was a much-loved son, grandson, brother and nephew.', 'Citation': {'Paragraph': 7, 'StartChar': 1, 'EndChar': 59}}, {'Speaker': 'Relatives of Mr Geddes', 'Text': 'He will be sorely missed every day by all who knew him.', 'Citation': {'Paragraph': 8, 'StartChar': 1, 'EndChar': 58}}], 'Description': [{'Description': 'Brandon Booth, 25, made no plea and was remanded in custody after he appeared before Aberdeen Sheriff Court.', 'Citation': {'Paragraph': 5, 'StartChar': 0, 'EndChar': 97}}], 'Image': [{'ID': 'image_1', 'Caption': 'A young man smiling with blue skies in the background'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will initiate a search to gather more details surrounding the street incident in Aberdeen.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Aberdeen street incident details\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Police at the scene where a man was found seriously injured in Pennan Road, Aberdeen\", \"score\": 0.7169220447540283}, {\"text\": \"Anyone with information about the incident is asked to contact Police Scotland.\", \"score\": 0.6129288673400879}, {\"text\": \"A picture of the scene of the collision on Exeter Street. A police vehicle and ambulance can be seen.\", \"score\": 0.6002846956253052}, {\"text\": \"The incident was condemned by both clubs, with Aberdeen calling it \\\"totally unacceptable.\\\"\", \"score\": 0.5961490869522095}, {\"text\": \"The incident happened at about 00:35 at the junction of Blackness Road and Elliot Road.\", \"score\": 0.5805477499961853}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"The search provided several relevant pieces of information. I will insert the detail about the location where the man was found injured.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Police at the scene where a man was found seriously injured in Pennan Road, Aberdeen\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will insert a statement asking for witnesses to come forward, which adds to the ongoing investigation status.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Anyone with information about the incident is asked to contact Police Scotland.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  }
+]

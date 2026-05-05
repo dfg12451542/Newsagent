@@ -1,0 +1,15 @@
+{
+  "total_prompt_tokens": 11291,
+  "total_completion_tokens": 486,
+  "total_tokens": 11777,
+  "action_counts": {
+    "search": 3,
+    "insert": 0,
+    "remove": 0
+  },
+  "insert_fail_count": 3,
+  "all_time = ": 48.582249879837036,
+  "avg_search_time": 4.678303400675456,
+  "avg_insert_time": 0.0001399517059326172,
+  "write_time": 6.6100358963012695
+}

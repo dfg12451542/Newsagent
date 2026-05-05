@@ -1,0 +1,18 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent.\nYour job is to search for 'historical information' and insert the important ones into 'current draft'.\n\nYou are given report title, firsthand information of the report, searching record, current draft.\n\nCheck the current draft and choose an action to execute <search/insert/terminate>\n\nsearch : search an information and but it into the searching record\ninsert : insert a query from searching record to current draft\n\nterminate : end the task and output the current draft\n\nNotice:\n- only the query from searching record can be output.\n- do not insert information that already in the current draft.\n\n***Only output the action <search/insert/terminate> you want to execute (only output a word)***\n***Do not output anything else except the action***"
+  },
+  {
+    "role": "user",
+    "content": "Title: Car fire ignites moorland blaze on A30 in Cornwall\nDate: 2025-07-13\nFirsthand information: {'Speaker': [], 'Description': [{'Description': 'Fire crews have tackled a car fire which spread to nearby moorland in Cornwall.', 'Citation': {'Paragraph': 1, 'StartChar': 0, 'EndChar': 67}}, {'Description': 'Fire crews from Launceston and Bodmin dealt with the blaze.', 'Citation': {'Paragraph': 4, 'StartChar': 0, 'EndChar': 51}}], 'Image': [{'ID': 'image_1', 'Caption': 'Smoke emerges from a car on fire as firefighters tackle the fire.'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "searching record : ['The shortlist for 2025 in Devon and Cornwall:', 'The shortlist for 2025 in Devon and Cornwall:', 'On 7 January, 2023, six cars belonging to staff at HMP Addiewell in West Lothian were set on fire late at night.', 'On 7 January, 2023, six cars belonging to staff at HMP Addiewell in West Lothian were set on fire late at night.']\ncurrent draft : []"
+  },
+  {
+    "role": "system",
+    "content": "\"car fire Cornwall moorland blaze A30\""
+  }
+]

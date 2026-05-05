@@ -1,0 +1,58 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent that follows a Thought → Action → Observation loop to build a coherent, multimodal draft step by step.\n\nYour goal is to construct a complete news draft, 'insert' only evidence retrieved from the observation 'search', the data from user prompt can't be inserted.\nAt each step, your task is to output only the next Thought and Action — the system will return the Observation separately after your Action.\nEach loop must produce ONLY the following structure — NO EXCEPTIONS\nAt every step, follow this strict loop format to output a json format:\n\nThought: Describe your next plan and reasoning.\nAction: A JSON object in the form by outputting:\n{\n  \"Thought\": \"<Your thought>\"\n  \"Action\": \"<one of: search | insert | remove | terminate>\",\n}\nObservation: The result from the system based on your action.\n\nRepeat this loop until you decide to terminate the process by outputting:\n\n{\n   \"Thought\": \"<Your thought>\",\n   \"Action\": \"terminate\",\n   \"query\": {},\n}\n\nYou MUST adhere to the following constraints:\n- DO NOT perform more than one action per step.\n- DO NOT output multiple actions in a single response.\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft.\n\nAvailable Actions:\n\n1. search  \n• Perform semantic search across the dataset (Firsthand_Information + Historical_Information)  \n• Required fields: query\n• Example:\n{\n  \"Thought\": \"I will search for reactions to Sue Gray's report to gather insights.\",\n  \"Action\": \"search\",\n  \"query\": {\n    \"text\": \"Sue Gray report reaction\"\n  }\n}\n\n2. insert  \n• Only can be done after \"search\" is done\n• Insert one previously searched object into the draft  \n• Required fields: obj (must match one in previous Observation)  \n• Example:\n{\n  \"Thought\": \"The search result provided a crucial quote on Sue Gray's report that I will insert into the draft.\",\n  \"Action\": \"insert\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\n3. remove  \n• Remove an inserted object by ID or Speaker  \n• Required field: object_id  \n• Example:\n{\n  \"Thought\": \"<Your thought>\" \n  \"Action\": \"remove\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\nLoop until you issue `\"Action\": \"terminate\"`.\n{\n   \"Thought\": \"<Your thought>\"\n   \"Action\": \"terminate\",\n   \"query\": {}\n}\n\nAt the end, the draft will be saved and evaluated. Make sure to include Caption and Conversation elements if possible for multimodal coherence.\n\nYou MUST adhere to the following constraints:\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft."
+  },
+  {
+    "role": "user",
+    "content": "Title: Shubhanshu Shukla: First Indian astronaut to go to ISS is on his way back\nDate: 2025-07-14\nFirsthand information: {'Speaker': [{'Speaker': 'Group Captain Shubhanshu Shukla', 'Text': 'It has been an incredible journey. Even though now it is coming to an end, for you and me there is a long way to go. The journey of our human space mission is very long and difficult. But if we are determined, even the stars are attainable.', 'Citation': {'Paragraph': 8, 'StartChar': 0, 'EndChar': 222}}, {'Speaker': 'Group Captain Shubhanshu Shukla', 'Text': \"Even today we want to know how it looks from space. I'll tell you. From space, today's India looks ambitious. It looks fearless. It looks confident. It looks proud. And so, I can once again say that today's India still looks better than the rest of the world,\", 'Citation': {'Paragraph': 10, 'StartChar': 0, 'EndChar': 236}}], 'Description': [{'Description': 'Astronaut Shubhanshu Shukla, who created history by becoming the first Indian ever to set foot on the International Space Station (ISS), is on his way back.', 'Citation': {'Paragraph': 1, 'StartChar': 0, 'EndChar': 110}}, {'Description': 'A live broadcast showed the Axiom-4 (Ax-4) mission undocking from the orbiting laboratory with its four-member crew on Monday. It is expected to splash down in just under 24 hours.', 'Citation': {'Paragraph': 2, 'StartChar': 0, 'EndChar': 178}}, {'Description': 'On Monday, ISS posted on X that the Ax-4 crew had taken their places in the spacecraft and its hatches had been closed. The undocking of the craft - when it separated from the ISS - was broadcast live.', 'Citation': {'Paragraph': 6, 'StartChar': 0, 'EndChar': 195}}, {'Description': 'Axiom Space said the craft would splash down in the ocean off the coast of California and a vessel would then pick it up.', 'Citation': {'Paragraph': 7, 'StartChar': 0, 'EndChar': 105}}, {'Description': 'Indian Science Minister Jitendra Singh has said the splash down is scheduled for 15 July at approximately 15:00 India time (09:30 GMT).', 'Citation': {'Paragraph': 8, 'StartChar': 0, 'EndChar': 110}}, {'Description': 'Ax-4, which was originally expected to spend two weeks on the ISS, ended up staying a few days longer. During their stay, Axiom Space said the crew conducted 60 scientific experiments, including seven designed by Indian Space Research Organisation (Isro).', 'Citation': {'Paragraph': 11, 'StartChar': 0, 'EndChar': 239}}, {'Description': 'Isro, which had paid 5bn rupees ($59m; £43m) to secure a seat for Group Captain Shukla on Ax-4 and his training, has said the hands-on experience he gains during his trip to the ISS will help India in its human space flights.', 'Citation': {'Paragraph': 12, 'StartChar': 0, 'EndChar': 219}}, {'Description': 'Before flying into space, Group Captain Shukla described the past year as \"nothing short of transformative\".', 'Citation': {'Paragraph': 16, 'StartChar': 0, 'EndChar': 87}}, {'Description': '\"It has been an amazing journey so far, but the best is yet to come,\" he said. \"As I go into space, I carry not just instruments and equipment, I carry hopes and dreams of a billion hearts. I request all Indians to pray for the success of our mission,\" he had said.', 'Citation': {'Paragraph': 17, 'StartChar': 0, 'EndChar': 274}}], 'Image': [{'ID': 'image_1', 'Caption': 'ISRO (Indian Space Research Organisation) astronaut Shubhanshu Shukla, one of the four members of Axiom Mission 4, is pictured here with a wide smile, in a dark backdrop.'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will search for more information about Shubhanshu Shukla's journey back from the ISS to gather additional context for the news article.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Shubhanshu Shukla return journey ISS Axiom-4\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Only the second Indian to travel to space, Group Captain Shukla's journey occurred 41 years after cosmonaut Rakesh Sharma's flight on a Russian Soyuz in 1984.\", \"score\": 0.5187878608703613}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I have acquired a relevant piece of information that highlights Shubhanshu Shukla's significance as the second Indian in space. I will insert this into the draft to provide a broader context.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Only the second Indian to travel to space, Group Captain Shukla's journey occurred 41 years after cosmonaut Rakesh Sharma's flight on a Russian Soyuz in 1984.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"Next, I will search for reactions or comments made by the public or officials regarding Shubhanshu Shukla's mission, as it will add depth to the article and capture the sentiment surrounding the event.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"public reaction Shubhanshu Shukla Axiom-4 mission\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": []}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"The search did not yield any results regarding public reaction to Shubhanshu Shukla's mission. I will now look for comments or statements made by officials or other relevant figures related to his journey and the Axiom-4 mission.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"official statements Shubhanshu Shukla Axiom-4 mission\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": []}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"As I did not find relevant reactions or comments from officials about Shubhanshu Shukla's mission, I will instead search for any future implications of his journey for India's space exploration efforts, which might be useful for the article.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"future implications Shubhanshu Shukla India space exploration\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Only the second Indian to travel to space, Group Captain Shukla's journey occurred 41 years after cosmonaut Rakesh Sharma's flight on a Russian Soyuz in 1984.\", \"score\": 0.5918688178062439}, {\"text\": \"Only the second Indian to travel to space is Group Captain Shukla, whose journey occurred 41 years after cosmonaut Rakesh Sharma's flight on a Russian Soyuz in 1984.\", \"score\": 0.5901454091072083}, {\"text\": \"The Indian Space Research Organisation (Isro) has revealed its intentions to launch Gaganyaan, which will be India’s inaugural human spaceflight, in 2027. Additionally, they have set ambitious goals to establish a space station by 2035 and to send an astronaut to the Moon by 2040.\", \"score\": 0.5647379159927368}, {\"text\": \"The Indian Space Research Organisation (ISRO) has revealed its intention to send Gaganyaan, the nation’s inaugural manned space mission, into orbit in 2027. Furthermore, it has set ambitious goals to establish a space station by 2035 and to dispatch an astronaut to the Moon by 2040.\", \"score\": 0.5158493518829346}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I found important information regarding India's future space exploration goals, which includes the Gaganyaan mission and plans for a space station and lunar missions. I will insert this into the draft to highlight the implications of Shubhanshu Shukla's journey for India's space program.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"The Indian Space Research Organisation (ISRO) has revealed its intention to send Gaganyaan, the nation\\u2019s inaugural manned space mission, into orbit in 2027. Furthermore, it has set ambitious goals to establish a space station by 2035 and to dispatch an astronaut to the Moon by 2040.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  }
+]

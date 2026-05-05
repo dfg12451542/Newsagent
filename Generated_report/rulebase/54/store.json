@@ -1,0 +1,26 @@
+[
+  {
+    "section": "default",
+    "content": {
+      "text": "The road was closed for about six hours as a result of the incident.",
+      "score": 0.8684042692184448
+    },
+    "source": "search"
+  },
+  {
+    "section": "default",
+    "content": {
+      "text": "The road was closed for several hours while police carried out investigations, but National Highways said it had reopened at about 10:15 BST.",
+      "score": 0.8073363304138184
+    },
+    "source": "search"
+  },
+  {
+    "section": "default",
+    "content": {
+      "text": "The road was closed for more than 12 hours.",
+      "score": 0.8012765645980835
+    },
+    "source": "search"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent that follows a Thought → Action → Observation loop to build a coherent, multimodal draft step by step.\n\nYour goal is to construct a complete news draft, 'insert' only evidence retrieved from the observation 'search', the data from user prompt can't be inserted.\nAt each step, your task is to output only the next Thought and Action — the system will return the Observation separately after your Action.\nEach loop must produce ONLY the following structure — NO EXCEPTIONS\nAt every step, follow this strict loop format to output a json format:\n\nThought: Describe your next plan and reasoning.\nAction: A JSON object in the form by outputting:\n{\n  \"Thought\": \"<Your thought>\"\n  \"Action\": \"<one of: search | insert | remove | terminate>\",\n}\nObservation: The result from the system based on your action.\n\nRepeat this loop until you decide to terminate the process by outputting:\n\n{\n   \"Thought\": \"<Your thought>\",\n   \"Action\": \"terminate\",\n   \"query\": {},\n}\n\nYou MUST adhere to the following constraints:\n- DO NOT perform more than one action per step.\n- DO NOT output multiple actions in a single response.\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft.\n\nAvailable Actions:\n\n1. search  \n• Perform semantic search across the dataset (Firsthand_Information + Historical_Information)  \n• Required fields: query\n• Example:\n{\n  \"Thought\": \"I will search for reactions to Sue Gray's report to gather insights.\",\n  \"Action\": \"search\",\n  \"query\": {\n    \"text\": \"Sue Gray report reaction\"\n  }\n}\n\n2. insert  \n• Only can be done after \"search\" is done\n• Insert one previously searched object into the draft  \n• Required fields: obj (must match one in previous Observation)  \n• Example:\n{\n  \"Thought\": \"The search result provided a crucial quote on Sue Gray's report that I will insert into the draft.\",\n  \"Action\": \"insert\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\n3. remove  \n• Remove an inserted object by ID or Speaker  \n• Required field: object_id  \n• Example:\n{\n  \"Thought\": \"<Your thought>\" \n  \"Action\": \"remove\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\nLoop until you issue `\"Action\": \"terminate\"`.\n{\n   \"Thought\": \"<Your thought>\"\n   \"Action\": \"terminate\",\n   \"query\": {}\n}\n\nAt the end, the draft will be saved and evaluated. Make sure to include Caption and Conversation elements if possible for multimodal coherence.\n\nYou MUST adhere to the following constraints:\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft."
+  },
+  {
+    "role": "user",
+    "content": "Title: Five Teesside stories you might have missed this week\nDate: 2025-07-13\nFirsthand information: {'Speaker': [], 'Description': [{'Description': 'Jager, an eight-week-old Belgian Malinois, was found running around the streets of Hartlepool last week before he was taken in by animal charity Stray Aid, Durham Police said.', 'Citation': {'Paragraph': 2, 'StartChar': 0, 'EndChar': 137}}, {'Description': \"After seeing the young pup's potential, the organisation contacted the force's Dog Support Unit to see if there was a job for him.\", 'Citation': {'Paragraph': 3, 'StartChar': 0, 'EndChar': 114}}, {'Description': 'Residents spotted the fish floating on the surface of the lake at Locke Park, Redcar, Teesside.', 'Citation': {'Paragraph': 5, 'StartChar': 0, 'EndChar': 80}}, {'Description': 'The Environment Agency (EA) investigated and determined it had been caused by \"natural factors\".', 'Citation': {'Paragraph': 6, 'StartChar': 0, 'EndChar': 89}}, {'Description': 'The Department for Transport (DfT) has now confirmed the work in a £92bn national package announced on Tuesday.', 'Citation': {'Paragraph': 9, 'StartChar': 0, 'EndChar': 92}}], 'Image': [{'ID': 'image_1', 'Caption': 'A big crowd of people sitting on grass. One person is holding a Spanish flag, the other is holding a Polish flag. Everyone is in traditional folk clothing.'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I need to start building the news draft. I will begin by searching for information related to the Hartlepool pup, Jager, to expand on the initial description provided.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Jager Hartlepool Stray Aid Durham Police\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Jager, an eight-week-old Belgian Malinois, was found running around the streets of Hartlepool last week before he was taken in by animal charity Stray Aid, Durham Police said.\", \"score\": 0.555955708026886}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{\\\"Thought\\\": \\\"The search confirms the initial information about Jager. Now I will search for more details about the fish found in Locke Park, Redcar to expand on that story. \\\", \\\"Action\\\": \\\"search\\\", \\\"query\\\": {\\\"text\\\": \\\"fish found Locke Park Redcar\\\"}}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Residents spotted the fish floating on the surface of the lake at Locke Park, Redcar, Teesside.\", \"score\": 0.6499865055084229}, {\"text\": \"A spokesperson for the Environment Agency: \\\"We have investigated a fish kill incident at Locke Park and determined that it was caused by natural factors,\\\"\", \"score\": 0.5582315325737}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{\\\"Thought\\\": \\\"I will now insert the initial description of Jager into the draft. This will form the first part of the story.\\\", \\\"Action\\\": \\\"insert\\\", \\\"query\\\": {\\\"text\\\": \\\"Jager, an eight-week-old Belgian Malinois, was found running around the streets of Hartlepool last week before he was taken in by animal charity Stray Aid, Durham Police said.\\\"}}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{\\\"Thought\\\": \\\"Now I'll insert the description of the fish found in Locke Park, adding another story to the draft.\\\", \\\"Action\\\": \\\"insert\\\", \\\"query\\\": {\\\"text\\\": \\\"Residents spotted the fish floating on the surface of the lake at Locke Park, Redcar, Teesside.\\\"}}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{\\\"Thought\\\": \\\"I will search for information about the Department for Transport work and the \\u00a392bn package to develop the third story.\\\", \\\"Action\\\": \\\"search\\\", \\\"query\\\": {\\\"text\\\": \\\"Department for Transport \\u00a392bn package\\\"}}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"The projects have been announced by the Department for Transport following a £92bn settlement from the government's national Spending Review.\", \"score\": 0.6123898029327393}, {\"text\": \"In April, the BBC reported that the Department for Transport (DfT) would contribute £91.1 million to the £109 million project.\", \"score\": 0.6122943758964539}, {\"text\": \"It was part of a £19.9m package of funding.\", \"score\": 0.6045722961425781}, {\"text\": \"The Department for Transport (DfT) has now confirmed the work in a £92bn national package announced on Tuesday.\", \"score\": 0.591996431350708}, {\"text\": \"A sum of £7.728m from the local transport grant for 2025-26 - rising to £54m by 2029-30 - can be used for road maintenance, safety upgrades and traffic signal improvements.\", \"score\": 0.5880135297775269}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{\\\"Thought\\\": \\\"I will insert the statement about the Department for Transport's \\u00a392bn package. This will make a complete third story for the draft.\\\", \\\"Action\\\": \\\"insert\\\", \\\"query\\\": {\\\"text\\\": \\\"The Department for Transport (DfT) has now confirmed the work in a \\u00a392bn national package announced on Tuesday.\\\"}}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  }
+]

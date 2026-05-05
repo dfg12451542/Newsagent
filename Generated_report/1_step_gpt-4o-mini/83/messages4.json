@@ -1,0 +1,50 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent that follows a Thought → Action → Observation loop to build a coherent, multimodal draft step by step.\n\nYour goal is to construct a complete news draft, 'insert' only evidence retrieved from the observation 'search', the data from user prompt can't be inserted.\nAt each step, your task is to output only the next Thought and Action — the system will return the Observation separately after your Action.\nEach loop must produce ONLY the following structure — NO EXCEPTIONS\nAt every step, follow this strict loop format to output a json format:\n\nThought: Describe your next plan and reasoning.\nAction: A JSON object in the form by outputting:\n{\n  \"Thought\": \"<Your thought>\"\n  \"Action\": \"<one of: search | insert | remove | terminate>\",\n}\nObservation: The result from the system based on your action.\n\nRepeat this loop until you decide to terminate the process by outputting:\n\n{\n   \"Thought\": \"<Your thought>\",\n   \"Action\": \"terminate\",\n   \"query\": {},\n}\n\nYou MUST adhere to the following constraints:\n- DO NOT perform more than one action per step.\n- DO NOT output multiple actions in a single response.\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft.\n\nAvailable Actions:\n\n1. search  \n• Perform semantic search across the dataset (Firsthand_Information + Historical_Information)  \n• Required fields: query\n• Example:\n{\n  \"Thought\": \"I will search for reactions to Sue Gray's report to gather insights.\",\n  \"Action\": \"search\",\n  \"query\": {\n    \"text\": \"Sue Gray report reaction\"\n  }\n}\n\n2. insert  \n• Only can be done after \"search\" is done\n• Insert one previously searched object into the draft  \n• Required fields: obj (must match one in previous Observation)  \n• Example:\n{\n  \"Thought\": \"The search result provided a crucial quote on Sue Gray's report that I will insert into the draft.\",\n  \"Action\": \"insert\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\n3. remove  \n• Remove an inserted object by ID or Speaker  \n• Required field: object_id  \n• Example:\n{\n  \"Thought\": \"<Your thought>\" \n  \"Action\": \"remove\",\n  \"query\": {\n    \"text\": \"Sue Gray's report criticized leadership at No.10.\"\n  }\n}\n\nLoop until you issue `\"Action\": \"terminate\"`.\n{\n   \"Thought\": \"<Your thought>\"\n   \"Action\": \"terminate\",\n   \"query\": {}\n}\n\nAt the end, the draft will be saved and evaluated. Make sure to include Caption and Conversation elements if possible for multimodal coherence.\n\nYou MUST adhere to the following constraints:\n- \"insert\" only can be done after \"search\" is done\n- You are STRICTLY limited to using only content returned from prior `\"Action\": \"search\"` observations.\n- You may only insert objects that exactly match an earlier Observation.\n- If modifying or removing, you must refer to objects already inserted in the draft."
+  },
+  {
+    "role": "user",
+    "content": "Title: Five Teesside stories you might have missed this week\nDate: 2025-07-13\nFirsthand information: {'Speaker': [], 'Description': [{'Description': 'Jager, an eight-week-old Belgian Malinois, was found running around the streets of Hartlepool last week before he was taken in by animal charity Stray Aid, Durham Police said.', 'Citation': {'Paragraph': 2, 'StartChar': 0, 'EndChar': 137}}, {'Description': \"After seeing the young pup's potential, the organisation contacted the force's Dog Support Unit to see if there was a job for him.\", 'Citation': {'Paragraph': 3, 'StartChar': 0, 'EndChar': 114}}, {'Description': 'Residents spotted the fish floating on the surface of the lake at Locke Park, Redcar, Teesside.', 'Citation': {'Paragraph': 5, 'StartChar': 0, 'EndChar': 80}}, {'Description': 'The Environment Agency (EA) investigated and determined it had been caused by \"natural factors\".', 'Citation': {'Paragraph': 6, 'StartChar': 0, 'EndChar': 89}}, {'Description': 'The Department for Transport (DfT) has now confirmed the work in a £92bn national package announced on Tuesday.', 'Citation': {'Paragraph': 9, 'StartChar': 0, 'EndChar': 92}}], 'Image': [{'ID': 'image_1', 'Caption': 'A big crowd of people sitting on grass. One person is holding a Spanish flag, the other is holding a Polish flag. Everyone is in traditional folk clothing.'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"I will search for information on recent stories from Teesside to gather notable events that might have been overlooked.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Teesside news highlights\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"BBC Gossip Banner\", \"score\": 0.5017138719558716}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"The search did not yield relevant stories from Teesside; I will now search specifically for recent animal or environmental news in the area to gather more targeted information.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Teesside animal news or environmental issues\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"Additionally, wildlife is affected as well.\", \"score\": 0.5294243693351746}, {\"text\": \"The organisation wants residents to look out for a mammal, bird, reptile, plant and insect that it said typify Surrey's wildlife.\", \"score\": 0.5282039642333984}, {\"text\": \"Councillor Beverley Hardman: It is a wonderful opportunity for our community to connect with the environment and help care for our local ducks and waterfowl.\", \"score\": 0.5266516208648682}, {\"text\": \"Ms Gladwin: expressed concerns over flooding and fire risks, and what the development could mean for wildlife species.\", \"score\": 0.5190603733062744}, {\"text\": \"Members of the public are also being asked to report sightings of dead wild waterfowl – such as swans, geese and ducks - or other wild birds such as gulls or birds of prey to the department for environment, food and rural affairs (Defra).\", \"score\": 0.5117388963699341}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"The search results provided several relevant quotes regarding wildlife and environmental concerns in Teesside. I will insert the information about residents being asked to report sightings of dead wild waterfowl as it underscores environmental issues in the area.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Members of the public are also being asked to report sightings of dead wild waterfowl \\u2013 such as swans, geese and ducks - or other wild birds such as gulls or birds of prey to the department for environment, food and rural affairs (Defra).\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"Now that I have an inserted quote about reporting dead wild waterfowl, I will search for additional community events in Teesside to enrich the draft with stories that highlight local engagement and issues.\\\",  \\\"Action\\\": \\\"search\\\",  \\\"query\\\": {    \\\"text\\\": \\\"Teesside community events\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": [{\"text\": \"The event takes place in the town from 12 July until 9 August.\", \"score\": 0.5253341197967529}, {\"text\": \"They show hundreds of performers who descended on Teesside in their national costumes.\", \"score\": 0.5171886682510376}, {\"text\": \"This weekend, there are several free events taking place in the region, ranging from Pride celebrations to poetry activities.\", \"score\": 0.5051078796386719}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "\"{  \\\"Thought\\\": \\\"The search results revealed a variety of upcoming events in Teesside, including Pride celebrations and poetry activities. I will insert the information about the events taking place this weekend to provide a glimpse into community engagement and activities happening in the area.\\\",  \\\"Action\\\": \\\"insert\\\",  \\\"query\\\": {    \\\"text\\\": \\\"This weekend, there are several free events taking place in the region, ranging from Pride celebrations to poetry activities.\\\"  }}\""
+  },
+  {
+    "role": "assistant",
+    "content": "{\"Observation\": \" Object inserted\"}"
+  }
+]

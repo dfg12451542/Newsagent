@@ -1,0 +1,18 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent.\nYour job is to search for 'historical information' and insert the important ones into 'current draft'.\n\nYou are given report title, firsthand information of the report, searching record, current draft.\n\nCheck the current draft and choose an action to execute <search/insert/terminate>\n\nsearch : search an information and but it into the searching record\ninsert : insert a query from searching record to current draft\n\nterminate : end the task and output the current draft\n\nNotice:\n- only the query from searching record can be output.\n- do not insert information that already in the current draft.\n\n***Only output the action <search/insert/terminate> you want to execute (only output a word)***\n***Do not output anything else except the action***"
+  },
+  {
+    "role": "user",
+    "content": "Title: Fire breaks out in fields close to Guildford\nDate: 2025-07-14\nFirsthand information: {'Speaker': [{'Speaker': 'A spokesperson', 'Text': 'the fire broke out in fields adjacent to Piccards Farm House.', 'Citation': {'Paragraph': 2, 'StartChar': 26, 'EndChar': 73}}], 'Description': [{'Description': 'Some 10 fire crews are attempting to put out a large blaze in fields near a Surrey town.', 'Citation': {'Paragraph': 1, 'StartChar': 0, 'EndChar': 74}}, {'Description': 'Surrey Fire & Rescue Service was called at 16:20 BST on Monday to the blaze in the Sandy Lane area of Guildford.', 'Citation': {'Paragraph': 1, 'StartChar': 76, 'EndChar': 168}}, {'Description': 'No properties were damaged in the blaze, the service confirmed.', 'Citation': {'Paragraph': 3, 'StartChar': 0, 'EndChar': 56}}, {'Description': 'Residents in the area have been advised to keep windows and doors closed because of smoke.', 'Citation': {'Paragraph': 4, 'StartChar': 0, 'EndChar': 80}}], 'Image': [{'ID': 'image_1', 'Caption': 'Close up image of the front of a fire engine'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "searching record : ['Image shows a fire at an industrial estate in Leyton, London', 'Guildford', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London', 'Image shows a fire at an industrial estate in Leyton, London']\ncurrent draft : []"
+  },
+  {
+    "role": "system",
+    "content": "Piccards Farm House Guildford fire update"
+  }
+]

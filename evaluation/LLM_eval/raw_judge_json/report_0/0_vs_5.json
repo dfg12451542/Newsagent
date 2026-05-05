@@ -1,0 +1,42 @@
+{
+  "i": 0,
+  "j": 5,
+  "label_i": "1_step_gpt-4o",
+  "label_j": "2_step_Qwen3-32B",
+  "flipped_presentation": false,
+  "report_id": 0,
+  "result": {
+    "Factual Consistency": {
+      "winner": "tie",
+      "reasoning": "Both articles provide consistent factual information about the event and the station's history."
+    },
+    "Logical Consistency": {
+      "winner": "tie",
+      "reasoning": "Both articles are logically structured and present information in a coherent manner."
+    },
+    "Importance": {
+      "winner": "tie",
+      "reasoning": "Both articles cover the same event and provide similar levels of importance regarding the festival and the station's history."
+    },
+    "Readability": {
+      "winner": "first",
+      "reasoning": "The first article is slightly more engaging and varied in its sentence structure, making it easier to read."
+    },
+    "Objectivity": {
+      "winner": "tie",
+      "reasoning": "Both articles maintain a neutral tone and focus on factual reporting without inserting opinions."
+    },
+    "Journalistic": {
+      "winner": "tie",
+      "reasoning": "Both articles adhere to journalistic standards, providing quotes, context, and relevant details."
+    },
+    "Information Density": {
+      "winner": "first",
+      "reasoning": "The first article includes more specific details about the festival activities and historical context."
+    },
+    "Overall": {
+      "winner": "first",
+      "reasoning": "The first article wins overall due to its superior readability and information density, providing a richer and more engaging narrative."
+    }
+  }
+}

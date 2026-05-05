@@ -1,0 +1,18 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent.\nYour job is to search for 'historical information' and insert the important ones into 'current draft'.\n\nYou are given report title, firsthand information of the report, searching record, current draft.\n\nCheck the current draft and choose an action to execute <search/insert/terminate>\n\nsearch : search an information and but it into the searching record\ninsert : insert a query from searching record to current draft\n\nterminate : end the task and output the current draft\n\nNotice:\n- only the query from searching record can be output.\n- do not insert information that already in the current draft.\n\n***Only output the action <search/insert/terminate> you want to execute (only output a word)***\n***Do not output anything else except the action***\n***Do not output any  thought***"
+  },
+  {
+    "role": "user",
+    "content": "Title: More than £8k raised for family after Sutton Coldfield lake death\nDate: 2025-07-14\nFirsthand information: {'Speaker': [{'Speaker': 'organiser Helena Swallow', 'Text': 'The family are so very grateful, thank you so much,', 'Citation': {'Paragraph': 6, 'StartChar': 0, 'EndChar': 49}}], 'Description': [{'Description': 'An online fundraising page set up to support the family of a boy who died after going missing in a lake has raised more than £8,000 within 48 hours.', 'Citation': {'Paragraph': 1, 'StartChar': 0, 'EndChar': 115}}, {'Description': 'A GoFundMe page, which organisers said on Saturday was set up with permission from Daniel\\'s parents, would help support the family during a \"difficult time\".', 'Citation': {'Paragraph': 3, 'StartChar': 0, 'EndChar': 144}}, {'Description': 'The fundraiser was initially created with the goal of raising £1,600 but quickly surpassed its target and now has a revised goal of £11,000.', 'Citation': {'Paragraph': 4, 'StartChar': 0, 'EndChar': 125}}, {'Description': 'In an update posted on Sunday, organiser Helena Swallow added the teenager\\'s mother was \"overwhelmed\" with all the support and donations.', 'Citation': {'Paragraph': 5, 'StartChar': 0, 'EndChar': 125}}], 'Image': [{'ID': 'image_1', 'Caption': 'A young man with dark curly hair against a black background'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "searching record : [\"His first charity event took place in Sutton Coldfield where he ran the town's 8.5 mile fun run earlier this year, raising more than £800 for the charity.\"]\ncurrent draft : []"
+  },
+  {
+    "role": "system",
+    "content": "sutton coldfield lake death fundraising page"
+  }
+]

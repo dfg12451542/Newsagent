@@ -1,0 +1,18 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent.\nYour job is to search for 'historical information' and insert the important ones into 'current draft'.\n\nYou are given report title, firsthand information of the report, searching record, current draft.\n\nCheck the current draft and choose an action to execute <search/insert/terminate>\n\nsearch : search an information and but it into the searching record\ninsert : insert a query from searching record to current draft\n\nterminate : end the task and output the current draft\n\nNotice:\n- only the query from searching record can be output.\n- do not insert information that already in the current draft.\n\n***Only output the action <search/insert/terminate> you want to execute (only output a word)***\n***Do not output anything else except the action***\n***Do not output any  thought***"
+  },
+  {
+    "role": "user",
+    "content": "Title: Ewan Henderson: Midfielder signs for Wycombe from Belgian side Beerschot\nDate: 2025-07-14\nFirsthand information: {'Speaker': [{'Speaker': 'Wycombe head coach Mike Dodds', 'Text': \"Ewan's a really energetic midfielder who's had a great start to his career in the top flights in Scotland and Belgium, and gives us another dimension in the middle of the park.\", 'Citation': {'Paragraph': 6, 'StartChar': 62, 'EndChar': 191}}, {'Speaker': 'Wycombe head coach Mike Dodds', 'Text': \"He's played a lot of football in the past three years which stands him in good stead to come here and hopefully hit the ground running as he integrates into the squad in pre-season.\", 'Citation': {'Paragraph': 7, 'StartChar': 1, 'EndChar': 156}}], 'Description': [{'Description': 'Wycombe Wanderers have made midfielder Ewan Henderson their eighth summer signing.', 'Citation': {'Paragraph': 1, 'StartChar': 0, 'EndChar': 76}}, {'Description': 'The 25 year-old Scotland youth international has joined from Belgian side Beerschot for an undisclosed fee.', 'Citation': {'Paragraph': 2, 'StartChar': 0, 'EndChar': 92}}, {'Description': 'Henderson joins Armando Junior Quitirna, Taylor Allen, Bradley Fink, Caolan Boyd-Munce, Dan Casey, James Tilley and Mikki van Sas in moving to Adams Park during this window.', 'Citation': {'Paragraph': 8, 'StartChar': 0, 'EndChar': 152}}], 'Image': [{'ID': 'image_1', 'Caption': 'Ewan Henderson in action for Beerschot against Sporting Charleroi'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "searching record : ['Ewan Henderson performing for Beerschot in a match against Sporting Charleroi.', 'Ewan Henderson performing for Beerschot in a match against Sporting Charleroi.', 'Ewan Henderson performing for Beerschot in a match against Sporting Charleroi.']\ncurrent draft : []"
+  },
+  {
+    "role": "system",
+    "content": "Ewan Henderson Beerschot stats"
+  }
+]

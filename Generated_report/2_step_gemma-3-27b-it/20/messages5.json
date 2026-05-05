@@ -1,0 +1,18 @@
+[
+  {
+    "role": "system",
+    "content": "You are a professional news reporter agent.\nYour job is to search for 'historical information' and insert the important ones into 'current draft'.\n\nYou are given report title, firsthand information of the report, searching record, current draft.\n\nCheck the current draft and choose an action to execute <search/insert/terminate>\n\nsearch : search an information and but it into the searching record\ninsert : insert a query from searching record to current draft\n\nterminate : end the task and output the current draft\n\nNotice:\n- only the query from searching record can be output.\n- do not insert information that already in the current draft.\n\n***Only output the action <search/insert/terminate> you want to execute (only output a word)***\n***Do not output anything else except the action***\n***Do not output any  thought***"
+  },
+  {
+    "role": "user",
+    "content": "Title: The Open: Welcome to Portrush\nDate: 2025-07-14\nFirsthand information: {'Speaker': [], 'Description': [{'Description': 'The best golfers in the world have descended on the Northern Irish town of Portrush for the 153rd Open Championship.', 'Citation': {'Paragraph': 1, 'StartChar': 0, 'EndChar': 89}}, {'Description': \"This page will be your dedicated resource for everything from the Open Championship as BBC Sport takes you through every twist and turn in the crowning of 2025's 'Champion Golfer of the Year'.\", 'Citation': {'Paragraph': 3, 'StartChar': 0, 'EndChar': 177}}, {'Description': \"Alongside our live radio and text coverage throughout the week, we'll aim to bring you some of the press conferences from the likes of Rory McIlroy and defending champion Xander Schauffele alongside expert analysis from our golf correspondent Iain Carter and reporters on the course.\", 'Citation': {'Paragraph': 4, 'StartChar': 0, 'EndChar': 242}}, {'Description': \"Just hit the 'follow' button on website or app to add it to your 'MySport' feed.\", 'Citation': {'Paragraph': 5, 'StartChar': 0, 'EndChar': 75}}], 'Image': [{'ID': 'image_1', 'Caption': 'The Open Championship at Royal Portrush'}]}"
+  },
+  {
+    "role": "assistant",
+    "content": "searching record : ['Rory McIlroy', 'The American golfer Xander Schauffele, who triumphed at Royal Troon in Scotland in 2024, is the reigning champion of The Open.', 'There were 20 spots to be won across four courses with 288 golfers playing for a chance to reach Royal Portrush.', 'There were 20 spots to be won across four courses with 288 golfers playing for a chance to reach Royal Portrush.', 'There were 20 spots to be won across four courses with 288 golfers playing for a chance to reach Royal Portrush.']\ncurrent draft : []"
+  },
+  {
+    "role": "system",
+    "content": "Royal Portrush golf course history"
+  }
+]

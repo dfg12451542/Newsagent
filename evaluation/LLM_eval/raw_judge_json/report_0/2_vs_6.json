@@ -1,0 +1,42 @@
+{
+  "i": 2,
+  "j": 6,
+  "label_i": "2_step_gpt-4o",
+  "label_j": "2_step_Llama-4-Scout-17B-16E-Instruct",
+  "flipped_presentation": false,
+  "report_id": 0,
+  "result": {
+    "Factual Consistency": {
+      "winner": "tie",
+      "reasoning": "Both articles provide consistent factual information about the festival and the Old Station."
+    },
+    "Logical Consistency": {
+      "winner": "tie",
+      "reasoning": "Both articles are logically structured and coherent, presenting the information in a clear sequence."
+    },
+    "Importance": {
+      "winner": "tie",
+      "reasoning": "Both articles emphasize the significance of the festival and the historical importance of the Old Station."
+    },
+    "Readability": {
+      "winner": "second",
+      "reasoning": "The second article is slightly more concise and easier to read, with fewer complex sentences."
+    },
+    "Objectivity": {
+      "winner": "tie",
+      "reasoning": "Both articles maintain a neutral tone, focusing on factual reporting without opinion."
+    },
+    "Journalistic": {
+      "winner": "tie",
+      "reasoning": "Both articles adhere to journalistic standards, providing quotes and relevant details."
+    },
+    "Information Density": {
+      "winner": "first",
+      "reasoning": "The first article includes additional details about the festival's activities and the involvement of Cirencester College students."
+    },
+    "Overall": {
+      "winner": "first",
+      "reasoning": "The first article provides more detailed information about the festival's activities, making it more informative overall."
+    }
+  }
+}
