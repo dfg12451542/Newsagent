@@ -23,6 +23,7 @@ Newsagent is a benchmark and framework for evaluating how large language models 
 ## Code structure
 
 - Crawl News Data and Generate Dataset
+If you only want to test ReAct flow and Evaluation, download the dataset above and skip this section.
 
     - Crawl data
     ```bash
@@ -62,29 +63,29 @@ Newsagent is a benchmark and framework for evaluating how large language models 
     python Statistic/semantic_search_historical_parallel.py
     ```
 
-- Running the ReAct Systems
+- 1-step and 2-step ReAct flow
 
     ```bash
-    # Run single-step ReAct (processes articles 0-100)
+    # Run 1-step ReAct (processes articles 0-100)
     python react/react_1_step.py
 
-    # Run two-step ReAct
+    # Run 2-step ReAct
     python react/react_2_step.py
 
     # Run rule-based approach 
     python react/rule_base.py
     ```
 
-- Evaluation System Differences
+- Evaluation
 
     ```bash
     # Full pairwise evaluation of all models, results in evaluation/LLM_eval
     python evaluation/LLM_evaluation.py
 
-    # F1 score evaluation for search and retrieval for 1-step react, results in evaluation/1_step_eval
+    # F1 score evaluation for search and retrieval for 1-step ReAct, results in evaluation/1_step_eval
     python evaluation/1_step_evaluation.py
 
-    # F1 score evaluation for search and retrieval for 2-step react, results in evaluation/2_step_eval
+    # F1 score evaluation for search and retrieval for 2-step ReAct, results in evaluation/2_step_eval
     python evaluation/2_step_evaluation.py
 
     # Analysis of raw evaluation outputs, results in evaluation/LLM_eval/analysis
