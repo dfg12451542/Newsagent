@@ -8,14 +8,14 @@ Newsagent is a benchmark and framework for evaluating how large language models 
 3. Insert/remove contextual evidence
 4. Rephrase drafts into final news articles
 ## Setup
-### Build environment
-```
-conda env create -f environment.yml
-```
-### Dataset
-Our dataset on osf : https://osf.io/nq83p/overview?view_only=c027289281964472aed2b8122ca46acc
+- Build environment
+    ```
+    conda env create -f environment.yml
+    ```
+- Dataset
+    Our dataset on osf : https://osf.io/nq83p/overview?view_only=c027289281964472aed2b8122ca46acc
 
-To run the code, download the zip file `report_dataset.zip` and unzip it to get the dataset `report_dataset.json`, then place the dataset file `report_dataset.json` under the main folder `/Newsagent`.
+    To run the code, download the zip file `report_dataset.zip` and unzip it to get the dataset `report_dataset.json`, then place the dataset file `report_dataset.json` under the main folder `/Newsagent`.
 
 view of dataset:
 ```
