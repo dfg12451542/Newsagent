@@ -104,7 +104,7 @@ python Statistic/rewrite_historical_info.py
 python Statistic/tokenize_and_combine_json.py
 ```
 
-## Running the ReAct Systems
+### Running the ReAct Systems
 
 ```bash
 # Run single-step ReAct (processes articles 0-100)
@@ -117,7 +117,7 @@ python react/react_2_step.py
 python react/rule_base.py
 ```
 
-## Evaluation System Differences
+### Evaluation System Differences
 
 ```bash
 # Full pairwise evaluation of all models, results in evaluation/LLM_eval
