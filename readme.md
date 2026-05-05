@@ -67,7 +67,7 @@ view of dataset:
 
 ## Code structure
 
-### Crawl News Data and Generate Dataset
+* Crawl News Data and Generate Dataset
 
 Crawl data
 ```bash
@@ -102,9 +102,12 @@ python Statistic/rewrite_historical_info.py
 
 # Combine and tokenize all data, create `report_dataset.json`
 python Statistic/tokenize_and_combine_json.py
+
+# Generate 'historical_search_results.json' for evlauation
+python Statistic/semantic_search_historical_parallel.py
 ```
 
-### Running the ReAct Systems
+* Running the ReAct Systems
 
 ```bash
 # Run single-step ReAct (processes articles 0-100)
@@ -117,7 +120,7 @@ python react/react_2_step.py
 python react/rule_base.py
 ```
 
-### Evaluation System Differences
+* Evaluation System Differences
 
 ```bash
 # Full pairwise evaluation of all models, results in evaluation/LLM_eval
