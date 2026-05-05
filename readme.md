@@ -85,54 +85,54 @@ view of dataset:
     ```
 
 
-Process articles through GPT to extract structured information
-```bash
-# Process articles and extract Report_info, Firsthand_Information, Historical_Information, create `_data_june_july.json`
-python Generate_json/request.py
-```
+    - Process articles through GPT to extract structured information
+    ```bash
+    # Process articles and extract Report_info, Firsthand_Information, Historical_Information, create `_data_june_july.json`
+    python Generate_json/request.py
+    ```
 
-Combine and tokenize the data:
+    - Combine and tokenize the data:
 
-```bash
-# Filter for English articles only
-python Statistic/filter_english_news.py
+    ```bash
+    # Filter for English articles only
+    python Statistic/filter_english_news.py
 
-# Optionally rewrite historical information for parallel data
-python Statistic/rewrite_historical_info.py
+    # Optionally rewrite historical information for parallel data
+    python Statistic/rewrite_historical_info.py
 
-# Combine and tokenize all data, create `report_dataset.json`
-python Statistic/tokenize_and_combine_json.py
+    # Combine and tokenize all data, create `report_dataset.json`
+    python Statistic/tokenize_and_combine_json.py
 
-# Generate 'historical_search_results.json' for evlauation
-python Statistic/semantic_search_historical_parallel.py
-```
+    # Generate 'historical_search_results.json' for evlauation
+    python Statistic/semantic_search_historical_parallel.py
+    ```
 
-* Running the ReAct Systems
+- Running the ReAct Systems
 
-```bash
-# Run single-step ReAct (processes articles 0-100)
-python react/react_1_step.py
+    ```bash
+    # Run single-step ReAct (processes articles 0-100)
+    python react/react_1_step.py
 
-# Run two-step ReAct
-python react/react_2_step.py
+    # Run two-step ReAct
+    python react/react_2_step.py
 
-# Run rule-based approach 
-python react/rule_base.py
-```
+    # Run rule-based approach 
+    python react/rule_base.py
+    ```
 
-* Evaluation System Differences
+- Evaluation System Differences
 
-```bash
-# Full pairwise evaluation of all models, results in evaluation/LLM_eval
-python evaluation/LLM_evaluation.py
+    ```bash
+    # Full pairwise evaluation of all models, results in evaluation/LLM_eval
+    python evaluation/LLM_evaluation.py
 
-# F1 score evaluation for search and retrieval for 1-step react, results in evaluation/1_step_eval
-python evaluation/1_step_evaluation.py
+    # F1 score evaluation for search and retrieval for 1-step react, results in evaluation/1_step_eval
+    python evaluation/1_step_evaluation.py
 
-# F1 score evaluation for search and retrieval for 2-step react, results in evaluation/2_step_eval
-python evaluation/2_step_evaluation.py
+    # F1 score evaluation for search and retrieval for 2-step react, results in evaluation/2_step_eval
+    python evaluation/2_step_evaluation.py
 
-# Analysis of raw evaluation outputs, reseults in evaluation/LLM_eval/analysis
-python evaluation/anal_raw.py
-```
+    # Analysis of raw evaluation outputs, reseults in evaluation/LLM_eval/analysis
+    python evaluation/anal_raw.py
+    ```
 
