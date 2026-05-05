@@ -2,8 +2,8 @@ import json
 from sentence_transformers import SentenceTransformer
 
 INPUT_FILE_1 = 'english_articles_june_july.json'
-INPUT_FILE_2 = 'rewritten_thread.json'
-OUTPUT_FILE = 'combined_tokenized_output.json'
+INPUT_FILE_2 = 'rewritten_historical_info.json'
+OUTPUT_FILE = 'report_dataset.json'
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 

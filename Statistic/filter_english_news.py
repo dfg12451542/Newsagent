@@ -71,7 +71,8 @@ def extract_text_from_article(article):
                 if 'Description' in desc:
                     texts.append(desc['Description'])
     
-    return ' '.join(texts)
+    # return ' '.join(texts)
+    return ' '.join(str(t) for t in texts if t is not None)
 
 def filter_english_articles(input_file, output_file):
     """
@@ -121,7 +122,7 @@ def filter_english_articles(input_file, output_file):
     print("Done!")
 
 if __name__ == "__main__":
-    input_file = "_data_june_july_10000.json"
+    input_file = "_data_june_july.json"
     output_file = "english_articles_june_july.json"
     
     filter_english_articles(input_file, output_file) 

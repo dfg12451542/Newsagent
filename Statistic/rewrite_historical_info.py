@@ -9,7 +9,7 @@ import datetime
 from typing import Any
 
 def paraphrase_with_gpt(text: str, max_retries=5) -> str:
-    api_key = os.getenv('OPENAI_API_KEY', 'YOUR KEY')
+    api_key = os.getenv("OPENAI_API_KEY")
     client = openai.OpenAI(api_key=api_key)
     for attempt in range(max_retries):
         try:

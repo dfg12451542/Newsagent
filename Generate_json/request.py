@@ -9,7 +9,7 @@ from langdetect.lang_detect_exception import LangDetectException
 DetectorFactory.seed = 0
 
 data_folder = 'Crawl_data/june_july_news' 
-save_file = "report_dataset.json"
+save_file = "_data_june_july.json"
 
 def is_english_text(text):
     """

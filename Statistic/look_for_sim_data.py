@@ -7,7 +7,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import datetime
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
-api_key = 'YOUR KEY'
+api_key = os.getenv("OPENAI_API_KEY")
 
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 
