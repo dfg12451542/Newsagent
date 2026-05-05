@@ -14,56 +14,11 @@ Newsagent is a benchmark and framework for evaluating how large language models 
     ```
 - Dataset
 
-    Our dataset on osf : https://osf.io/nq83p/overview?view_only=c027289281964472aed2b8122ca46acc
-    To run the code, download the zip file `report_dataset.zip` and unzip it to get the dataset `report_dataset.json`, then place the dataset file `report_dataset.json` under the main folder `/Newsagent`.
-
-view of dataset:
-```
-{
-'0':
-{
-    "Title": "Harvey Weinstein is back on trial in New York. Jury selection begins Tuesday.",
-    "Firsthand_Information": (
-        "Firsthand_Information": {
-            "Speaker": [
-                {
-                    "Speaker": "Gloria Allred",
-                    "Text": "It’s painful, to go through the process again about a traumatic event.",
-                    "Citation": {
-                        "Paragraph": 5,
-                        "StartChar": 151,
-                        "EndChar": 207
-                    },
-                    "Encdoe":[]
-                },
-                {
-                    "Speaker": "Lindsay Goldbrum",
-                    "Text": "She is one of the bravest, strongest women that I have ever had the pleasure of knowing.",
-                    "Citation": {
-                        "Paragraph": 9,
-                        "StartChar": 40,
-                        "EndChar": 98
-                    },
-                    "Encdoe":[]
-                }
-            ],
-            "Description": [
-                {
-                    "Description": "Prosecutors have also added a new accuser in the retrial.",
-                    "Citation": {
-                        "Paragraph": 9,
-                        "StartChar": 0,
-                        "EndChar": 76
-                    },
-                    "Encdoe":[]
-                }
-            ],
-            "Image": []
-        },
-    )
-}
-}
-```
+    Our dataset on osf : https://osf.io/nq83p/overview?view_only=c027289281964472aed2b8122ca46acc.
+    To run the code:
+    1. Download ```report_dataset.zip```
+    2. Unzip to obtain ```report_dataset.json```
+    3. Place it under the root directory ```/Newsagent```
 
 ## Code structure
 
@@ -103,7 +58,7 @@ view of dataset:
     # Combine and tokenize all data, create `report_dataset.json`
     python Statistic/tokenize_and_combine_json.py
 
-    # Generate 'historical_search_results.json' for evlauation
+    # Generate 'historical_search_results.json' for evalauation
     python Statistic/semantic_search_historical_parallel.py
     ```
 
@@ -132,7 +87,55 @@ view of dataset:
     # F1 score evaluation for search and retrieval for 2-step react, results in evaluation/2_step_eval
     python evaluation/2_step_evaluation.py
 
-    # Analysis of raw evaluation outputs, reseults in evaluation/LLM_eval/analysis
+    # Analysis of raw evaluation outputs, results in evaluation/LLM_eval/analysis
     python evaluation/anal_raw.py
+    ```
+
+## View of Dataset:
+    ```
+    {
+    '0':
+    {
+        "Title": "Harvey Weinstein is back on trial in New York. Jury selection begins Tuesday.",
+        "Firsthand_Information": (
+            "Firsthand_Information": {
+                "Speaker": [
+                    {
+                        "Speaker": "Gloria Allred",
+                        "Text": "It’s painful, to go through the process again about a traumatic event.",
+                        "Citation": {
+                            "Paragraph": 5,
+                            "StartChar": 151,
+                            "EndChar": 207
+                        },
+                        "Encdoe":[]
+                    },
+                    {
+                        "Speaker": "Lindsay Goldbrum",
+                        "Text": "She is one of the bravest, strongest women that I have ever had the pleasure of knowing.",
+                        "Citation": {
+                            "Paragraph": 9,
+                            "StartChar": 40,
+                            "EndChar": 98
+                        },
+                        "Encdoe":[]
+                    }
+                ],
+                "Description": [
+                    {
+                        "Description": "Prosecutors have also added a new accuser in the retrial.",
+                        "Citation": {
+                            "Paragraph": 9,
+                            "StartChar": 0,
+                            "EndChar": 76
+                        },
+                        "Encdoe":[]
+                    }
+                ],
+                "Image": []
+            },
+        )
+    }
+    }
     ```
 
