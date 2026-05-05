@@ -67,22 +67,22 @@ view of dataset:
 
 ## Code structure
 
-* Crawl News Data and Generate Dataset
+- Crawl News Data and Generate Dataset
 
-Crawl data
-```bash
-# Crawl AP News articles from 2025, create `Crawl_data/APNews_output/`
-python Crawl_code/APNews_crawler.py
+    - Crawl data
+    ```bash
+    # Crawl AP News articles from 2025, create `Crawl_data/APNews_output/`
+    python Crawl_code/APNews_crawler.py
 
-# Crawl BBC News articles from 2025, , create `Crawl_data/BBC_output/` 
-python Crawl_code/bbc_crawler.py
+    # Crawl BBC News articles from 2025, , create `Crawl_data/BBC_output/` 
+    python Crawl_code/bbc_crawler.py
 
-# Collect June/July articles from both sources
-python Generate_json/collect.py
+    # Collect June/July articles from both sources
+    python Generate_json/collect.py
 
-# Check date ranges in crawled data, create `Crawl_data/june_july_news/`
-python Generate_json/get_date_range.py
-```
+    # Check date ranges in crawled data, create `Crawl_data/june_july_news/`
+    python Generate_json/get_date_range.py
+    ```
 
 
 Process articles through GPT to extract structured information
