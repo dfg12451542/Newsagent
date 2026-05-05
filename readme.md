@@ -22,7 +22,7 @@ Newsagent is a benchmark and framework for evaluating how large language models 
 
 ## Code structure
 
-- Crawl News Data and Generate Dataset(If you only want to test ReAct flow and Evaluation, download the dataset above and skip this section.)
+- Crawl News Data and Generate Dataset (If you only want to test ReAct flow and Evaluation, download the dataset above and skip this section.)
 
     - Crawl data
     ```bash
