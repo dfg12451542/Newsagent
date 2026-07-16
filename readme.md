@@ -20,6 +20,17 @@ Newsagent is a benchmark and framework for evaluating how large language models 
     2. Unzip to obtain ```report_dataset.json```
     3. Place it under the root directory ```/Newsagent```
 
+- Set API key
+    ```
+    export OPENAI_API_KEY="your_key_here"
+    export DEEPINFRA_API_KEY_1="your_key_here"
+    export DEEPINFRA_API_KEY_2="your_key_here"
+    export DEEPINFRA_API_KEY_3="your_key_here"
+    export GEMINI_API_KEY_1="your_key_here"
+    export GEMINI_API_KEY_2="your_key_here"
+    export GEMINI_API_KEY_3Y="your_key_here"
+    ```
+
 ## Code structure
 
 - Crawl News Data and Generate Dataset (If you only want to test ReAct flow and Evaluation, download the dataset above and skip this section.)
