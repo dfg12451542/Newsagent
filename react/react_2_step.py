@@ -34,9 +34,9 @@ elif TYPE == "DEEPINFRA":
     from openai import AsyncOpenAI
 
     DEEPINFRA_KEYS: List[str] = [
-        'YOUR KEY',
-        'YOUR KEY',
-        'YOUR KEY',
+        os.getenv("DEEPINFRA_API_KEY_1"),
+        os.getenv("DEEPINFRA_API_KEY_2"),
+        os.getenv("DEEPINFRA_API_KEY_3"),
     ]
 
     # Pre‑create a client per key so sockets + TLS handshakes are reused.
